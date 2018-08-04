@@ -1,0 +1,11 @@
+p edges 3 2
+v 0 0.9
+v 1 0.1
+v 2 0.6
+e 0 2
+e 1 2
+--- vertex types begin ---
+0 0
+1 1
+2 -1
+--- vertex types end ---
