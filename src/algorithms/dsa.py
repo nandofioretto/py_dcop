@@ -2,13 +2,13 @@ from algorithms.algorithm import Algorithm
 import numpy as np
 
 class Dsa(Algorithm):
-    def __init__(self, name, dcop_instance, args={'max_iter':10, 'type': 'A', 'p': 0.7}):
+    def __init__(self, name, dcop_instance, args={'max_iter':10, 'type': 'A', 'p': 0.7}, seed=1234):
         super(Dsa, self).__init__(name, dcop_instance, args)
         self.dsa_type = args['type']
         self.dsa_p    = args['p']
 
     def onStart(self, agt):
-        ## First Iteration
+        # First Iteration: Set random assignment
         agt.setRandomAssignment()
         agt.state.copyAgtAssignmentToState()
 

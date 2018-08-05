@@ -5,7 +5,7 @@ class Variable:
         self.name = name
         self.value = None
         self.type = type
-        self.domain = domain
+        self.domain = domain.copy()
         self.constraints = []
         self.controlled_by = None
         self.prng = np.random.RandomState(seed)

@@ -37,12 +37,20 @@ class Algorithm:
 
         for agtId in self.instance.agents:
             agt = self.instance.agents[agtId]
+            self.onCycleStart(agt)
             self.onCurrentCycle(agt)
+            self.onCycleEnd(agt)
 
     def onStart(self, agt):
         pass
 
+    def onCycleStart(self, agt):
+        pass
+
     def onCurrentCycle(self, agt):
+        pass
+
+    def onCycleEnd(self, agt):
         pass
 
     def onTermination(self, agt):

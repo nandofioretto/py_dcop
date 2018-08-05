@@ -4,9 +4,9 @@ from core.variable import Variable
 class Constraint:
     def __init__(self, name, scope=[], values={}, default_value = 0, type='extensional', seed=1234):
         self.name = name
-        self.scope = scope
+        self.scope = scope.copy()
         self.type = type
-        self.values = values
+        self.values = values.copy()
         self.default_value = default_value
         self.prng = np.random.RandomState(seed)
 
@@ -25,10 +25,15 @@ class Constraint:
 
         # order the var_vals in the same order of scope
         eval_tuple = tuple([var_vals[var.name] for var in self.scope])
+        return self.evaluateTuple(eval_tuple)
+
+    def evaluateTuple(self, eval_tuple):
+        '''Evaluates a tuple of values already ordreded as expected'''
         if eval_tuple in self.values:
             return self.values[eval_tuple]
         else:
             return self.default_value
+
 
     def evaluateCurrentAssignment(self):
         '''evaluate constraint with current variable assignment'''

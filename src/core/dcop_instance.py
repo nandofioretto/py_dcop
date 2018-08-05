@@ -62,7 +62,12 @@ class DCOPInstance:
         for agt in data['agents']:
             name = agt
             var_names = data['agents'][agt]['vars']
-            agt_constraints = list(set([c for c in self.variables[vid].constraints for vid in var_names]))
+            agt_constraints = []#list(set([c for c in self.variables[vid].constraints for vid in var_names]))
+            for vid in var_names:
+                for c in self.variables[vid].constraints:
+                    if c not in agt_constraints:
+                        agt_constraints.append(c)
+
             self.agents[name] = Agent(name,
                                       variables=[self.variables[vid] for vid in var_names],
                                       constraints=agt_constraints)
@@ -73,7 +78,8 @@ class DCOPInstance:
         for con in self.constraints:
             clique = [var.controlled_by for var in self.constraints[con].scope]
             for ai, aj in itertools.permutations(clique, 2):
-                ai.addNeighbor(aj)
+                ai.addNeighbor(aj, self.constraints[con])
+
 
     def __str__(self):
         s = '========== DCOP Instance ===========\n'
@@ -157,3 +163,6 @@ if __name__ == '__main__':
     data_path = '/Users/nando/Repos/DCOP/py_dcop/data/'
     dcopIstance = DCOPInstance(data_path + 'binary.json')
     print(dcopIstance)
+
+    a = ['v1', 'v2', 'v0', 'v4', 'v3']
+    print(sorted(a))
