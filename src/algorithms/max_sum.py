@@ -8,7 +8,6 @@ class MaxSum(Algorithm):
         super(MaxSum, self).__init__(name, dcop_instance, args, seed)
         self.damping = args['damping']
 
-        # A centralized version:
         self.msg_from_var_to_con = { vname: {} for vname in dcop_instance.variables }
         self.msg_from_con_to_var = { cname: {} for cname in dcop_instance.constraints }
 

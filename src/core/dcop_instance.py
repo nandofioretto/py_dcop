@@ -11,8 +11,10 @@ import itertools
 class DCOPInstance:
     def __init__(self, filepath):
         self.data = None
+
         self.communication_graph = nx.DiGraph() # not used for now
         self.ccg_graph = nx.DiGraph()           # not used for now
+
         self.agents = {}
         self.variables = {}
         self.constraints = {}
