@@ -54,7 +54,7 @@ class CCGMaxSum(Algorithm):
 
 
 
-def transform_constraint_to_ccg_gadget(con: Constraint) -> nx.DiGraph:
+def transform_constraint_to_ccg_gadget(con: Constraint) -> nx.Graph:
     """
     Transforms a constraint into the associated CCG gadget
     :param con: A constraint (~core.constraint.Constraint)
@@ -70,7 +70,7 @@ def transform_constraint_to_ccg_gadget(con: Constraint) -> nx.DiGraph:
     """
     pass
 
-def merge_mwvc_constraints(agt1: str, G1: nx.DiGraph, agt2: str, G2:  nx.DiGraph) -> (nx.DiGraph, nx.DiGraph):
+def merge_mwvc_constraints(agt1: str, G1: nx.Graph, agt2: str, G2:  nx.Graph) -> (nx.Graph, nx.Graph):
     """
         Merge the weights associated to the nodes of type 'dec_var' that have the same 'name'.
         It assigns
