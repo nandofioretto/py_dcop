@@ -33,7 +33,7 @@ class CCGMaxSum(Algorithm):
         super(CCGMaxSum, self).__init__(name, dcop_instance, args, seed)
         self.damping = args['damping']
 
-        # If this was defined as a centralied import:
+        # If this were defined as a centralied import, then we can use the following code:
         self.ccg = importGGCGraph(args['ccg_graph'])
         self.msgs = {u: {v for v in self.ccg.neighbors(u)} for u in self.ccg.nodes()}
         self.agt_ccg = {aname: nx.Graph() for a in dcop_instance.agents}
@@ -70,8 +70,6 @@ class CCGMaxSum(Algorithm):
                 self.num_messages_sent += 1
                 self.msgs[u][v] = m
 
-
-
     def onCycleEnd(self, agt):
         ccg = self.agt_ccg[agt]
         weights = nx.get_node_attributes(ccg, 'weight')
@@ -88,9 +86,12 @@ class CCGMaxSum(Algorithm):
     def onTermination(self, agt):
         pass
 
-
     def getVarValue(var):
-        # Take all neighbors variables ...
+        ccg = self.agt_ccg[var.controlled_by.name]
+        weights = nx.get_node_attributes(ccg, 'weight')
+        for u in ccg.neighbors(var.name):
+            # .... Implement logic here
+
         pass
 
 def importGGCGraph(file):
