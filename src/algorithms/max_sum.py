@@ -58,12 +58,15 @@ class MaxSum(Algorithm):
             self.var = var
 
         def sendMsgVarToCon(self, con, Mailer):
-            '''
+            """
             The message sent from a variable-node x to a function-node F at iteration i contains,
             for each of the values d in the domain of x, the sum of costs for d that was received
             from all function neighbors apart from F at iteration i-1
             The size of the message x -> F : dom_x
-            '''
+            :param con:
+            :param Mailer:
+            :return:
+            """
             values = np.sum(Mailer.msg_from_con_to_var[con.name][self.var.name] for con in self.var.constraints)
             # Exclude values coming from this constraint
             table_var_to_con = values - Mailer.msg_from_con_to_var[con.name][self.var.name]

@@ -33,25 +33,66 @@ class CCGMaxSum(Algorithm):
         super(CCGMaxSum, self).__init__(name, dcop_instance, args, seed)
         self.damping = args['damping']
 
-        self.CCG_graph = None
-
-        self.msgs = {}
+        # If this was defined as a centralied import:
+        self.ccg = importGGCGraph(args['ccg_graph'])
+        self.msgs = {u: {v for v in self.ccg.neighbors(u)} for u in self.ccg.nodes()}
+        self.agt_ccg = {aname: nx.Graph() for a in dcop_instance.agents}
 
     def onStart(self, agt):
+        ccg = self.agt_ccg[agt]
+        for u in ccg.nodes():
+            for v in ccg.neighbors(u):
+                self.msgs[u][v] = np.asarray([0, 0])
+
+    def onCycleStart(self, agt):
         pass
 
     def onCurrentCycle(self, agt):
-        pass
+        ccg = self.agt_ccg[agt]
+        weights = nx.get_node_attributes(ccg, 'weight')
 
-    def onCurrentCycle(self, agt):
-        pass
+        for u in ccg.nodes():
+            # sum all messages from u's neighbors to itself
+            sum_msgs = np.sum(self.msgs[t][u] for t in ccg.neighbors(u))
+
+            # Send messages to neighbors
+            for v in ccg.neighbors(u):
+                sum_without_v = sum_msgs - self.msgs[t][u]
+                m  = np.asarray([weights[u] + sum_without_v[1],
+                                 np.min(sum_without_v[0], sum_without_v[1] + weights[u])])
+                # Normalize values
+                m -= np.min(m) # m -= np.mean(m)
+                # Add noise to help stabilizing convergence
+                m += np.abs(self.prng.normal(scale=1.0, size=len(m)))
+                if self.damping > 0:
+                    m = self.damping * self.msgs[u][v] + (1-self.damping) * m
+
+                self.num_messages_sent += 1
+                self.msgs[u][v] = m
+
+
 
     def onCycleEnd(self, agt):
-        pass
+        ccg = self.agt_ccg[agt]
+        weights = nx.get_node_attributes(ccg, 'weight')
+        type = nx.get_node_attributes(ccg, 'type')
+
+        for var in agt.variables:
+            u = var.name
+            sum_msgs = np.sum(self.msgs[t][u] for t in ccg.neighbors(u))
+            if weights[u] < sum_msgs:
+                var.setAssignment(1)
 
     def onTermination(self, agt):
         pass
 
+
+    def getVarValue(var):
+        # Take all neighbors variables ...
+        pass
+
+def importGGCGraph(file):
+    pass
 
 
 def transform_constraint_to_ccg_gadget(con: Constraint) -> nx.Graph:
@@ -97,3 +138,10 @@ def merge_mwvc_constraints(agt1: str, G1: nx.Graph, agt2: str, G2:  nx.Graph) ->
             G1.remove_node(u)
 
     return G1, G2
+
+
+# from src.core.agent_state import AgentState
+#
+# class GGCAgentState(AgentState):
+#     def __init__(self, name, agt, seed=1234):
+#         super(GGCAgentState, self).__init__(name, agt, seed)
