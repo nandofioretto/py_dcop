@@ -82,6 +82,8 @@ class CCGMaxSum(Algorithm):
             sum_msgs = np.sum(self.msgs[t][u] for t in ccg.neighbors(u))
             if weights[u] < sum_msgs:
                 var.setAssignment(1)
+            else:
+                var.setAssignment(0)
 
     def onTermination(self, agt):
         pass
