@@ -97,13 +97,31 @@ class CCGMaxSum(Algorithm):
     def onTermination(self, agt):
         pass
 
-    def getVarValue(var):
+    def getVarValue(var, vc):
+        """
+        Get the value of a variable.
+        :param var: The variable of interest.
+        :param vc: The computed vertex cover, which is a set of nodes.
+        """
         ccg = self.agt_ccg[var.controlled_by.name]
-        weights = nx.get_node_attributes(ccg, 'weight')
-        for u in ccg.neighbors(var.name):
-            # .... Implement logic here
 
-        pass
+        if len(var.domain) == 2:  # Boolean variable
+            for i, n in ccg.nodes(data=True):
+                if n['variable'] == var.name:
+                    assert(n['rank'] == 0)
+                    return 1 if i in vc else 0
+        else:  # Non-Boolean variable
+            # Get all nodes relevant to the variable of interest. We shouldn't need to find all such
+            # pairs, but this would be easier for debugging.
+            node_rank_pairs = tuple(
+                n['rank'] for i, n in ccg.nodes(data=True)
+                          if (n['variable'] == var.name and i not in vc))
+            assert(len(node_rank_pairs) <= 1)
+            if len(node_rank_pairs) == 0:
+                return 0
+            else:
+                return node_rank_pairs[0]
+
 
 def importGGCGraph(file):
     pass
