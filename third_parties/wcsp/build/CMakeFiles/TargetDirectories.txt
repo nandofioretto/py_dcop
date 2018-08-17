@@ -1,0 +1,13 @@
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/CMakeFiles/install/local.dir
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/CMakeFiles/install/strip.dir
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/CMakeFiles/install.dir
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/CMakeFiles/list_install_components.dir
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/CMakeFiles/rebuild_cache.dir
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/CMakeFiles/edit_cache.dir
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/src/CMakeFiles/install/local.dir
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/src/CMakeFiles/rebuild_cache.dir
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/src/CMakeFiles/edit_cache.dir
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/src/CMakeFiles/install/strip.dir
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/src/CMakeFiles/install.dir
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/src/CMakeFiles/list_install_components.dir
+/Users/nando/Downloads/wcsp-solver-high-domain-clique/build/src/CMakeFiles/wcsp.dir

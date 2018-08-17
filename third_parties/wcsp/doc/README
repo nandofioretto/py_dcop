@@ -1,0 +1,5 @@
+To build the documentation,
+
+1. install doxygen, then
+2. run doxygen in this directory (The HTML version will be available in build/html), and finally
+3. go to build/latex and run make to build the PDF version of the documentation.

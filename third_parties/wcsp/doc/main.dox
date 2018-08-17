@@ -1,0 +1,77 @@
+/*
+  Copyright (c) 2016-2017 Hong Xu
+
+  This file is part of WCSPLift.
+
+  WCSPLift is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  WCSPLift is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with WCSPLift.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/**
+   \mainpage Introduction
+ */
+
+/**
+   \page clu Command Line Usage
+
+   The command line usage can be viewed by executing the built binary &ldquo;wcsp&rdquo; with the
+   &ldquo;-h&rdquo; switch, i.e., <tt>wcsp -h</tt>. They are copied below for reference purposes.
+
+   <pre>
+   Usage: wcsp [options] [input-file]
+   Options:
+    -h [ --help ]                         print help message
+    -c [ --ccg ] arg                      specify the file that the output CCG
+                                            should be written into (default is
+                                            stdout)
+    -f [ --file-format ] arg (=d)         specify the input file format:
+                                            d: DIMACS
+                                            u: UAI
+    -g [ --ccg-only ]                     print the CCG only without solving the
+                                            MWVC problem on it
+    -k [ --no-kernelization ]             don't kernelize
+    -K [ --kernelization-only ]           exit after kernelization
+    -M [ --message-passing ]              do message passing on the original
+                                            problem directly
+    -L [ --linear-programming ]           use linear programming to solve the
+                                            original problem directly
+    -m [ --mwvc-solver ] arg (=l)         MWVC solver:
+                                            l: linear program solver
+                                            m: Message Passing
+    -p [ --parameters ] arg
+    -t [ --time-limit ] arg (=+infinity)
+                                          specify the time limit in seconds
+                                          (currently used for message passing and
+                                          linear programming algorithms)
+    </pre>
+
+ */
+
+/**
+   \page License
+
+   Copyright (c) 2016-2017 Hong Xu
+
+   WCSPLift is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   WCSPLift is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with WCSPLift.  If not, see <http://www.gnu.org/licenses/>.
+ */
