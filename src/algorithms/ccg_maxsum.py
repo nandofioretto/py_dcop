@@ -42,22 +42,27 @@ class CCGMaxSum(Algorithm):
         super(CCGMaxSum, self).__init__(name, dcop_instance, args, seed)
         self.damping = args['damping']
 
-        # If this were defined as a centralied import, then we can use the following code:
         self.ccg = transform_dcop_instance_to_ccg(dcop_instance)
+
+        # todo: Check this line below (every neighbor has a message)
         self.msgs = {u: {v for v in self.ccg.neighbors(u)} for u in self.ccg.nodes()}
-        self.agt_ccg = {aname: nx.Graph() for a in dcop_instance.agents}
+        self.agt_ccg = make_gadgets(self.ccg)
 
     def onStart(self, agt):
-        ccg = self.agt_ccg[agt]
+        ccg = self.agt_ccg[agt.name]
         for u in ccg.nodes():
             for v in ccg.neighbors(u):
                 self.msgs[u][v] = np.asarray([0, 0])
+
+        # todo: Check that by the end of this function each single msg is initialized
 
     def onCycleStart(self, agt):
         pass
 
     def onCurrentCycle(self, agt):
-        ccg = self.agt_ccg[agt]
+        # Todo: Check Line by line with debugger
+
+        ccg = self.agt_ccg[agt.name]
         weights = nx.get_node_attributes(ccg, 'weight')
 
         for u in ccg.nodes():
@@ -66,7 +71,7 @@ class CCGMaxSum(Algorithm):
 
             # Send messages to neighbors
             for v in ccg.neighbors(u):
-                sum_without_v = sum_msgs - self.msgs[t][u]
+                sum_without_v = sum_msgs - self.msgs[v][u]
                 m  = np.asarray([weights[u] + sum_without_v[1],
                                  np.min(sum_without_v[0], sum_without_v[1] + weights[u])])
                 # Normalize values
@@ -80,22 +85,27 @@ class CCGMaxSum(Algorithm):
                 self.msgs[u][v] = m
 
     def onCycleEnd(self, agt):
+        # TODO: Set variable to 1 or 0 in the CCG
         ccg = self.agt_ccg[agt]
         weights = nx.get_node_attributes(ccg, 'weight')
         type = nx.get_node_attributes(ccg, 'type')
 
-        for var in agt.variables:
+        vertex_cover = []
+        for var in agt.variables: ## iterate for all variables in ccg here 
             u = var.name
             sum_msgs = np.sum(self.msgs[t][u] for t in ccg.neighbors(u))
             if weights[u] < sum_msgs:
-                var.setAssignment(1)
+                vertex_cover.append(u) 
             else:
-                var.setAssignment(0)
+
+        for var in agt.variables: ## iterate for all variables in ccg here 
+            var.setAssignment(getVarValue(var, vertex_cover))
 
     def onTermination(self, agt):
         pass
 
     def getVarValue(var, vc):
+        # TODO - modify from here 
         """
         Get the value of a variable.
         :param var: The variable of interest.

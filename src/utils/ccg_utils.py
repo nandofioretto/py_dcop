@@ -139,6 +139,7 @@ def transform_dcop_instance_to_ccg(instance: DCOPInstance) -> nx.Graph:
 
     return ccg
 
+# Not used
 def merge_mwvc_constraints(agt1: str, G1: nx.Graph, agt2: str, G2:  nx.Graph) -> (nx.Graph, nx.Graph):
     """
         Merge the weights associated to the nodes of type 'dec_var' that have the same 'name'.
@@ -167,8 +168,9 @@ def merge_mwvc_constraints(agt1: str, G1: nx.Graph, agt2: str, G2:  nx.Graph) ->
 
     return G1, G2
 
-def make_gadgets(dcop_instance):
-    G = transform_dcop_instance_to_ccg(dcop_instance)
+
+def make_gadgets(G):
+    #G = transform_dcop_instance_to_ccg(dcop_instance)
 
     # Associates variables to CCG nodes
     var_to_ccg_nodes = {vname: [] for vname in dcop_instance.variables}
@@ -178,34 +180,40 @@ def make_gadgets(dcop_instance):
 
     ## Partition the nodes among agents:
     processed_nodes = []
-    G_agts = {vname: nx.Graph() for vname in dcop_instance.variables}
+    
+    G_agts = {aname: nx.Graph() for aname in dcop_instance.agents}
 
     for v in dcop_instance.variables:
+        a = v.controlled_by.name
         for n in var_to_ccg_nodes[v]:
-            G_agts[v].add_node(n, attr_dict=G.node[n])
+            G_agts[a].add_node(n, attr_dict=G.node[n])
             processed_nodes.append(n)
 
         for n in var_to_ccg_nodes[v]:
             ngbs_n = G.neighbors(n)
             for m in ngbs_n:
                 if m not in processed_nodes:
-                    G_agts[v].add_node(m, attr_dict=G.node[n])
+                    G_agts[a].add_node(m, attr_dict=G.node[n])
                     processed_nodes.append(m)
 
     ## Partition edges among agents
     processed_edges = []
     for v in dcop_instance.variables:
-        # print(nx.edges(G, G_agts[v].nodes))
+        a = v.controlled_by.name
         tmp = []
-        for n in G_agts[v].nodes:
+        for n in G_agts[a].nodes:
             for e in nx.edges(G, n):
                 if (e[0], e[1]) in processed_edges: continue
                 if (e[1], e[0]) in processed_edges: continue
                 processed_edges.append((e[0], e[1]))
                 processed_edges.append((e[1], e[0]))
                 tmp.append(e)
-        G_agts[v].add_edges_from(tmp)
+        G_agts[a].add_edges_from(tmp)
 
     for v in dcop_instance.variables:
+        a = v.controlled_by.name
         for (n1, n2) in G_agts[v].edges:
-            G_agts[v].add_node(n2, attr_dict=G.node[n2])
+            G_agts[a].add_node(n2, attr_dict=G.node[n2])
+
+    return G_agts
+    
