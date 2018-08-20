@@ -33,7 +33,8 @@ from algorithms.algorithm import Algorithm
 from core.agent import Agent
 from core.constraint import Constraint
 from core.dcop_instance import DCOPInstance
-from utils.utils import takeMin, insertInTuple, load_dimacs_to_networkx
+from utils.utils import takeMin, insertInTuple
+from utils.ccg_utils import transform_dcop_instance_to_ccg, make_gadgets
 
 
 class CCGMaxSum(Algorithm):
@@ -43,10 +44,8 @@ class CCGMaxSum(Algorithm):
         self.damping = args['damping']
 
         self.ccg = transform_dcop_instance_to_ccg(dcop_instance)
-
-        # todo: Check this line below (every neighbor has a message)
-        self.msgs = {u: {v for v in self.ccg.neighbors(u)} for u in self.ccg.nodes()}
-        self.agt_ccg = make_gadgets(self.ccg)
+        self.msgs = {u: {v: np.asarray([-1,-1]) for v in self.ccg.neighbors(u)} for u in self.ccg.nodes()}
+        self.agt_ccg = make_gadgets(self.ccg, dcop_instance)
 
     def onStart(self, agt):
         ccg = self.agt_ccg[agt.name]
@@ -73,7 +72,7 @@ class CCGMaxSum(Algorithm):
             for v in ccg.neighbors(u):
                 sum_without_v = sum_msgs - self.msgs[v][u]
                 m  = np.asarray([weights[u] + sum_without_v[1],
-                                 np.min(sum_without_v[0], sum_without_v[1] + weights[u])])
+                                 min(sum_without_v[0], sum_without_v[1] + weights[u])])
                 # Normalize values
                 m -= np.min(m) # m -= np.mean(m)
                 # Add noise to help stabilizing convergence
@@ -85,27 +84,26 @@ class CCGMaxSum(Algorithm):
                 self.msgs[u][v] = m
 
     def onCycleEnd(self, agt):
-        # TODO: Set variable to 1 or 0 in the CCG
-        ccg = self.agt_ccg[agt]
+        ccg = self.agt_ccg[agt.name]
         weights = nx.get_node_attributes(ccg, 'weight')
         type = nx.get_node_attributes(ccg, 'type')
 
         vertex_cover = []
-        for var in agt.variables: ## iterate for all variables in ccg here 
-            u = var.name
+        for u in ccg.nodes:
             sum_msgs = np.sum(self.msgs[t][u] for t in ccg.neighbors(u))
-            if weights[u] < sum_msgs:
-                vertex_cover.append(u) 
-            else:
 
-        for var in agt.variables: ## iterate for all variables in ccg here 
-            var.setAssignment(getVarValue(var, vertex_cover))
+            if sum_msgs[0] > sum_msgs[1] + weights[u]:
+                vertex_cover.append(u)
+            # if weights[u] < sum_msgs:
+            #     vertex_cover.append(u)
+
+        for var in agt.variables:
+            self.setVarValue(var, vertex_cover)
 
     def onTermination(self, agt):
         pass
 
-    def getVarValue(var, vc):
-        # TODO - modify from here 
+    def setVarValue(self, var, vc):
         """
         Get the value of a variable.
         :param var: The variable of interest.
@@ -114,18 +112,18 @@ class CCGMaxSum(Algorithm):
         ccg = self.agt_ccg[var.controlled_by.name]
 
         if len(var.domain) == 2:  # Boolean variable
-            for i, n in ccg.nodes(data=True):
-                if n['variable'] == var.name:
-                    assert(n['rank'] == 0)
-                    return 1 if i in vc else 0
+            for u, data in ccg.nodes(data=True):
+                if 'variable' in data and data['variable'] == var.name:
+                    assert(data['rank'] == 0)
+                    var.setAssignment(1 if u in vc else 0)
         else:  # Non-Boolean variable
             # Get all nodes relevant to the variable of interest. We shouldn't need to find all such
             # pairs, but this would be easier for debugging.
             node_rank_pairs = tuple(
-                n['rank'] for i, n in ccg.nodes(data=True)
-                          if (n['variable'] == var.name and i not in vc))
+                data['rank'] for u, data in ccg.nodes(data=True)
+                          if ('variable' in data and data['variable'] == var.name and u not in vc))
             assert(len(node_rank_pairs) <= 1)
             if len(node_rank_pairs) == 0:
-                return 0
+                var.setAssignment(0)
             else:
-                return node_rank_pairs[0]
+                var.setAssignment(node_rank_pairs[0])

@@ -38,7 +38,11 @@ class Algorithm:
         for agtId in self.instance.agents:
             agt = self.instance.agents[agtId]
             self.onCycleStart(agt)
+        for agtId in self.instance.agents:
+            agt = self.instance.agents[agtId]
             self.onCurrentCycle(agt)
+        for agtId in self.instance.agents:
+            agt = self.instance.agents[agtId]
             self.onCycleEnd(agt)
 
     def onStart(self, agt):
