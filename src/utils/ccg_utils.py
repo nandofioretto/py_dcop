@@ -171,10 +171,11 @@ def merge_mwvc_constraints(agt1: str, G1: nx.Graph, agt2: str, G2:  nx.Graph) ->
 
 def make_gadgets(G, dcop_instance):
 
-    def add_node_from(G_to, G_from, n):
+    def add_node_from(G_to, G_from, n, agt=None):
         G_to.add_node(n)
         for attr in G_from.nodes[n]:
             G_to.nodes[n][attr] = G_from.nodes[n][attr]
+        G_to.nodes[n]['owner'] = agt
 
     #G = transform_dcop_instance_to_ccg(dcop_instance)
 
@@ -192,14 +193,14 @@ def make_gadgets(G, dcop_instance):
     for v in dcop_instance.variables:
         a = dcop_instance.variables[v].controlled_by.name
         for n in var_to_ccg_nodes[v]:
-            add_node_from(G_agts[a], G, n)
+            add_node_from(G_agts[a], G, n, a)
             processed_nodes.append(n)
 
         for n in var_to_ccg_nodes[v]:
             ngbs_n = G.neighbors(n)
             for m in ngbs_n:
                 if m not in processed_nodes:
-                    add_node_from(G_agts[a], G, m)
+                    add_node_from(G_agts[a], G, m, a)
                     processed_nodes.append(m)
 
     assert (G.number_of_nodes() == len(processed_nodes))
@@ -220,6 +221,7 @@ def make_gadgets(G, dcop_instance):
     # Check all edges have been assigned
     assert (G.number_of_edges() * 2 == len(processed_edges))
 
+    ##  Add nodes of connecting edges
     for v in dcop_instance.variables:
         a = dcop_instance.variables[v].controlled_by.name
         for (n1, n2) in G_agts[a].edges:

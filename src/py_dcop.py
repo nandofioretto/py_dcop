@@ -2,6 +2,7 @@ from core.dcop_instance import DCOPInstance
 from algorithms.dsa import Dsa
 from algorithms.max_sum import MaxSum
 from algorithms.ccg_maxsum import CCGMaxSum
+from algorithms.ccg_centralized import CCGCentralized
 
 from utils.stats_collector import StatsCollector
 
@@ -12,8 +13,9 @@ if __name__ == '__main__':
     print(dcopIstance)
 
     #algorithm = Dsa('dsa', dcopIstance, {'max_iter':10, 'type': 'A', 'p': 0.7})
-    #algorithm = MaxSum('maxsum', dcopIstance, {'max_iter': 10, 'damping': 0.0})
-    algorithm  = CCGMaxSum('ccg-maxsum', dcopIstance, {'max_iter': 10, 'damping': 0.0})
+    #algorithm = MaxSum('maxsum', dcopIstance, {'max_iter': 10, 'damping': 0.7})
+    algorithm  = CCGMaxSum('ccg-maxsum', dcopIstance, {'max_iter': 10, 'damping': 0.0}, seed=1234)
+    #algorithm  = CCGCentralized('ccg-maxsum', dcopIstance, {'max_iter': 10, 'damping': 0.0}, seed=1234)
 
     algorithm.run()
     StatsCollector.printSummary()
