@@ -38,10 +38,6 @@ from utils.ccg_utils import transform_dcop_instance_to_ccg, make_gadgets
 
 
 class CCGMaxSum(Algorithm):
-    # TODO: problem - agents need to hold copy of variables in the CCG which is actually controlled by other agents.
-    # However in line 66 for v in ccg.nodes() - each agent uses all its nodes in its CCG to send messages. This should be fixed!
-    # One solution is to return gadgets that are links to the nodes of the centralied CCG
-
     def __init__(self, name, dcop_instance, args={'max_iter':10, 'damping':0}, seed=1234):
         super(CCGMaxSum, self).__init__(name, dcop_instance, args, seed)
         self.damping = args['damping']
@@ -56,7 +52,6 @@ class CCGMaxSum(Algorithm):
         ccg = self.agt_ccg[agt.name]
         self.agt_ccg_nodes[agt.name] = [u for u, data in ccg.nodes(data=True)
                                         if 'owner' in data and data['owner'] == agt.name]
-
 
     def onCycleStart(self, agt):
         pass

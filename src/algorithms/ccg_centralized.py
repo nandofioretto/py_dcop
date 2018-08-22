@@ -14,6 +14,7 @@ class CCGCentralized(Algorithm):
         self.ccg = transform_dcop_instance_to_ccg(dcop_instance)
         self.msgs = {u: {v: np.asarray([0,0]) for v in self.ccg.neighbors(u)} for u in self.ccg.nodes()}
         self.root = min([aname for aname in dcop_instance.agents])
+        self.variables = dcop_instance.variables
 
     def onStart(self, agt):
         agt.setRandomAssignment()
@@ -63,7 +64,7 @@ class CCGCentralized(Algorithm):
             if sum_msgs[0] > sum_msgs[1] + weights[u]:
                 vertex_cover.append(u)
 
-        for var in agt.variables:
+        for var in self.variables:
             self.setVarValue(var, vertex_cover)
 
     def onTermination(self, agt):

@@ -5,6 +5,7 @@ from tempfile import NamedTemporaryFile
 import subprocess
 import sys
 import networkx as nx
+import numpy as np
 from core.dcop_instance import DCOPInstance
 
 def load_dimacs_to_networkx(s):
@@ -227,4 +228,28 @@ def make_gadgets(G, dcop_instance):
     #         add_node_from(G_agts[a], G, n2)
 
     return G_agts
-    
+
+
+def set_var_value(var, vc, ccg, prng=np.random):
+    """
+    Get the value of a variable.
+    :param var: The variable of interest.
+    :param vc: The computed vertex cover, which is a set of nodes.
+    """
+    if len(var.domain) == 2:  # Boolean variable
+        for u, data in ccg.nodes(data=True):
+            if 'variable' in data and data['variable'] == var.name:
+                assert(data['rank'] == 0)
+                var.setAssignment(1 if u in vc else 0)
+    else:  # Non-Boolean variable
+        # Get all nodes relevant to the variable of interest. We shouldn't need to find all such
+        # pairs, but this would be easier for debugging.
+        node_rank_pairs = tuple(
+            data['rank'] for u, data in ccg.nodes(data=True)
+                      if ('variable' in data and data['variable'] == var.name and u not in vc))
+        #assert(len(node_rank_pairs) <= 1)
+        N = len(node_rank_pairs)
+        if len(node_rank_pairs) == 0:
+            var.setAssignment(0)
+        else:
+            var.setAssignment(node_rank_pairs[prng.randint(0, N)])
