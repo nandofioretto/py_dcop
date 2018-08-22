@@ -89,7 +89,8 @@ class CCGCentralized(Algorithm):
                 data['rank'] for u, data in ccg.nodes(data=True)
                           if ('variable' in data and data['variable'] == var.name and u not in vc))
             #assert(len(node_rank_pairs) <= 1)
+            N = len(node_rank_pairs)
             if len(node_rank_pairs) == 0:
                 var.setAssignment(0)
             else:
-                var.setAssignment(node_rank_pairs[0])
+                var.setAssignment(node_rank_pairs[self.prng.randint(0, N)])

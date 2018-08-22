@@ -30,7 +30,7 @@ class Variable:
         return self.value
 
     def __str__(self):
-        s = 'variable' + str(self.name) + '\t agt='
+        s = 'variable: ' + str(self.name) + '\t agt='
         if self.controlled_by is not None:
             s += '(' + str(self.controlled_by.name) + ') '
         else:

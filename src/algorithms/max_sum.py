@@ -76,11 +76,11 @@ class MaxSum(Algorithm):
             # Add noise to help stabilizing convergence
             table_var_to_con += np.abs(Mailer.prng.normal(scale=1.0, size=len(table_var_to_con)))
             # Send message to constraint
-            # Todo: need To update the iteration! (otherwise it will invalidate this message)
             Mailer.num_messages_sent += 1
             if Mailer.damping > 0:
                 table_var_to_con = Mailer.damping * Mailer.msg_from_var_to_con[self.var.name][con.name] \
                                    + (1-Mailer.damping) * table_var_to_con
+
             Mailer.msg_from_var_to_con[self.var.name][con.name] = table_var_to_con
 
 

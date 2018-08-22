@@ -168,24 +168,19 @@ def merge_mwvc_constraints(agt1: str, G1: nx.Graph, agt2: str, G2:  nx.Graph) ->
 
     return G1, G2
 
+# Fast
+def add_node_from(G_to, G_from, n, agt=None):
+    G_to.add_node(n)
+    for attr in G_from.nodes[n]:
+        G_to.nodes[n][attr] = G_from.nodes[n][attr]
+    G_to.nodes[n]['owner'] = agt
 
 def make_gadgets(G, dcop_instance):
-
-    def add_node_from(G_to, G_from, n, agt=None):
-        G_to.add_node(n)
-        for attr in G_from.nodes[n]:
-            G_to.nodes[n][attr] = G_from.nodes[n][attr]
-        G_to.nodes[n]['owner'] = agt
-
-    #G = transform_dcop_instance_to_ccg(dcop_instance)
-
     # Associates variables to CCG nodes
     var_to_ccg_nodes = {vname: [] for vname in dcop_instance.variables}
     for n, d in G.nodes(data=True):
         if 'variable' in d:
             var_to_ccg_nodes[d['variable']].append(n)
-
-
     G_agts = {aname: nx.Graph() for aname in dcop_instance.agents}
 
     ## Partition the nodes among agents:
@@ -202,30 +197,34 @@ def make_gadgets(G, dcop_instance):
                 if m not in processed_nodes:
                     add_node_from(G_agts[a], G, m, a)
                     processed_nodes.append(m)
-
     assert (G.number_of_nodes() == len(processed_nodes))
 
     ## Partition edges among agents
-    processed_edges = []
-    for v in dcop_instance.variables:
-        a = dcop_instance.variables[v].controlled_by.name
-        tmp = []
-        for n in G_agts[a].nodes:
-            for e in nx.edges(G, n):
-                if (e[0], e[1]) in processed_edges: continue
-                if (e[1], e[0]) in processed_edges: continue
-                processed_edges.append((e[0], e[1]))
-                processed_edges.append((e[1], e[0]))
-                tmp.append(e)
-        G_agts[a].add_edges_from(tmp)
+    for a in G_agts:
+        G_agts[a].add_edges_from([e for n in G_agts[a].nodes for e in nx.edges(G, n)])
+    # processed_edges = []
+    # for v in dcop_instance.variables:
+    #     a = dcop_instance.variables[v].controlled_by.name
+    #     tmp = []
+    #     for n in G_agts[a].nodes:
+    #         for e in nx.edges(G, n):
+    #             if (e[0], e[1]) in processed_edges: continue
+    #             if (e[1], e[0]) in processed_edges: continue
+    #             processed_edges.append((e[0], e[1]))
+    #             processed_edges.append((e[1], e[0]))
+    #             tmp.append(e)
+    #     G_agts[a].add_edges_from(tmp)
     # Check all edges have been assigned
-    assert (G.number_of_edges() * 2 == len(processed_edges))
+    # assert (G.number_of_edges() * 2 == len(processed_edges))
 
     ##  Add nodes of connecting edges
-    for v in dcop_instance.variables:
-        a = dcop_instance.variables[v].controlled_by.name
+    for a in G_agts:
         for (n1, n2) in G_agts[a].edges:
             add_node_from(G_agts[a], G, n2)
+    # for v in dcop_instance.variables:
+    #     a = dcop_instance.variables[v].controlled_by.name
+    #     for (n1, n2) in G_agts[a].edges:
+    #         add_node_from(G_agts[a], G, n2)
 
     return G_agts
     

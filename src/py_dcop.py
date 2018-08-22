@@ -5,17 +5,26 @@ from algorithms.ccg_maxsum import CCGMaxSum
 from algorithms.ccg_centralized import CCGCentralized
 
 from utils.stats_collector import StatsCollector
+from core.dcop_generator import DCOPGenerator
 
 if __name__ == '__main__':
     data_path = '/Users/nando/Repos/DCOP/py_dcop/data/'
-    #data_path = '/Users/ferdinandofioretto/Repos/py_dcop/data/'
-    dcopIstance = DCOPInstance(data_path + 'binary.json')
-    print(dcopIstance)
 
-    #algorithm = Dsa('dsa', dcopIstance, {'max_iter':10, 'type': 'A', 'p': 0.7})
-    #algorithm = MaxSum('maxsum', dcopIstance, {'max_iter': 10, 'damping': 0.7})
-    algorithm  = CCGMaxSum('ccg-maxsum', dcopIstance, {'max_iter': 10, 'damping': 0.0}, seed=1234)
-    #algorithm  = CCGCentralized('ccg-maxsum', dcopIstance, {'max_iter': 10, 'damping': 0.0}, seed=1234)
+    g_gen = DCOPGenerator()
+    dcop = DCOPInstance()
 
+    #graph = g_gen.regular_grid(nnodes=10)
+    print('Generating Graph')
+    graph = g_gen.random_graph(nnodes=20, p1=0.6)
+    print('done')
+    dcop.generate_from_graph(G=graph, dsize=5, cost_range=(0, 10))
+    #dcopIstance = DCOPInstance(data_path + 'binary.json')
+
+    #algorithm = Dsa('dsa', dcop, {'max_iter':100, 'type': 'C', 'p': 0.7})
+    algorithm = MaxSum('maxsum', dcop, {'max_iter': 100, 'damping': 0.9})
+    #algorithm  = CCGMaxSum('ccg-maxsum', dcop, {'max_iter': 100, 'damping': 0.9}, seed=1234)
+    #algorithm  = CCGCentralized('ccg-maxsum', dcop, {'max_iter': 100, 'damping': 0.9}, seed=1234)
     algorithm.run()
-    StatsCollector.printSummary()
+    StatsCollector.printSummary(anytime=True)
+
+    # 5486

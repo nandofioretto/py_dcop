@@ -36,7 +36,7 @@ class Dsa(Algorithm):
         Delta = curr_cost - best_new_cost
         if Delta > 0 or (Delta == 0 and self.dsa_type == 'C'):
             # Select new values with probability p
-            if self.prng.binomial(n=1, p=0.1):
+            if self.prng.binomial(n=1, p=self.dsa_p):
                 # performs the update both in the agent's state and in the agent variables
                 agt.state.setAssignmentIt(best_assignment_it)
                 agt.setStateAssignment()

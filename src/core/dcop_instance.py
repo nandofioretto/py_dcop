@@ -9,7 +9,6 @@ import operator
 from core.variable import Variable
 from core.constraint import Constraint
 from core.agent import Agent
-import itertools
 
 class DCOPInstance:
     def __init__(self, filepath=None):
@@ -83,6 +82,18 @@ class DCOPInstance:
 
     def generate_from_graph(self, G: nx.Graph, dsize, max_clique_size=np.inf,
                             cost_range=(0, 10), p2=1.0, def_cost=0, seed=1234):
+        """
+        Generate a dcop instance from a Graph topology.
+        Merges all cliques up to size :param max_clique_size
+        :param G:
+        :param dsize:
+        :param max_clique_size:
+        :param cost_range:
+        :param p2:
+        :param def_cost:
+        :param seed:
+        :return:
+        """
         prng = np.random.RandomState(seed)
 
         # Generate Variables
@@ -93,17 +104,20 @@ class DCOPInstance:
 
         # Generate constraints - one for each clique
         cliques = list(nx.find_cliques(G))
-        for i, c in enumerate(cliques):
-            if len(c) > max_clique_size:
+        for i, clique in enumerate(cliques):
+            if len(clique) > max_clique_size:
                 print('Skipping constraints! Fix!')
                 continue
             name = 'c_' + str(i)
-            scope = ['v_' + str(ci) for ci in c]
+            scope = ['v_' + str(ci) for ci in clique]
             domains = [self.variables[vname].domain for vname in scope]
             all_tuples = product(*domains)
             n = reduce(operator.mul, map(len, domains), 1)
-                                                                           costs = prng.randint(low=cost_range[0], high=cost_range[1], size=n)
+            costs = prng.randint(low=cost_range[0], high=cost_range[1], size=n)
             con_values = {T: costs[i] for i, T in enumerate(all_tuples)}
+            self.constraints[name] = Constraint(name,
+                                                scope=[self.variables[vid] for vid in scope],
+                                                values=con_values)
             # add constriant to variables
             for vid in scope:
                 self.variables[vid].addConstraint(self.constraints[name])
@@ -112,9 +126,9 @@ class DCOPInstance:
         for n in G.nodes:
             name, vid = 'a_' + str(n), 'v_' + str(n)
             agt_constraints = []
-            for c in self.variables[vid].constraints:
-                if c not in agt_constraints:
-                    agt_constraints.append(c)
+            for clique in self.variables[vid].constraints:
+                if clique not in agt_constraints:
+                    agt_constraints.append(clique)
                     self.agents[name] = Agent(name, variables=[self.variables[vid]], constraints=agt_constraints)
             self.variables[vid].setOwner(self.agents[name])
 
@@ -125,17 +139,30 @@ class DCOPInstance:
                 ai.addNeighbor(aj, self.constraints[con])
 
     def to_file(self, fileout):
+        """
+        Write dcop instance to file as a json file
+        :param fileout:
+        :return:
+        """
         jout = {'constraints': {}, 'agents': {}, 'variables': {}}
-        for agt in self.agents:
-            jout['agents'][agt] = {'vars': [v.name for v in self.agents[agt].variables]}
-        for i, var in enumerate(self.variables):
-            jout['variables'][var] = {'id': i, 'cons': [c.name for c in self.variables[var].constraints],
-                                      'domain': self.variables[var].domain,
-                                      'type': 1,
-                                      'value': None}
-        for con in self.constraints:
-            jout['constraints'][con] = {'vals': self.constraints[con].values.values(),
-                                        'scope': self.constraints[con].scope}
+        for a in self.agents:
+            agt = self.agents[a]
+            jout['agents'][a] = {'vars': [v.name for v in agt.variables]}
+
+        for i, v in enumerate(self.variables):
+            var = self.variables[v]
+            jout['variables'][v] = {'id': i, 'cons': [c.name for c in var.constraints],
+                                    'domain': var.domain, 'type': 1, 'value': None,
+                                    'agent': var.controlled_by.name}
+
+        for c in self.constraints:
+            con = self.constraints[c]
+            jout['constraints'][c] = {'vals': [int(v) for v in con.values.values()],
+                                      'scope': [v.name for v in con.scope]}
+
+        print('Writing dcop instance on file', fileout)
+        with open(fileout, 'w') as fp:
+            json.dump(jout, fp, sort_keys=True, indent=4)
 
     def __str__(self):
         s = '========== DCOP Instance ===========\n'

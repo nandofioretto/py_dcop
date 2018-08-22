@@ -41,6 +41,7 @@ class Constraint:
         return self.values[eval_tuple] if eval_tuple in self.values else self.default_value
 
     def __str__(self):
-        s = 'constraint:' + str(self.name) + '\t'
+        s = 'constraint: ' + str(self.name) + '\t'
         s += ' scope: ' + str([v.name for v in self.scope])
+        s += ' values: ' + str(list(self.values.values()))
         return s
