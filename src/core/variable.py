@@ -15,7 +15,7 @@ class Variable:
         self.type = type
 
     def addConstraint(self, constraint):
-        if constraint not in self.constraints:
+        if constraint.name not in [c.name for c in self.constraints]:
             self.constraints.append(constraint)
 
     def setOwner(self, agent):
