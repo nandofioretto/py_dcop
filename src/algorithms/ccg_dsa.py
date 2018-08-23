@@ -15,15 +15,35 @@ class CCGDsa(Algorithm):
         self.view = {u: 0 for u in self.ccg.nodes()}
         self.values = {u: 0 for u in self.ccg.nodes()}
         self.variables = dcop_instance.variables.values()
+        self.var_ccg_nodes = {vname : [(u, data['rank']) for u, data in self.ccg.nodes(data=True)
+                                                         if ('variable' in data and data['variable'] == vname)]
+                                for vname in dcop_instance.variables}
 
 
     def onStart(self, agt):
         # First Iteration: Set random assignment
-        agt.setRandomAssignment()
-
+        #agt.setRandomAssignment()
         if agt.name is self.root:
-            for u in self.ccg.nodes():
-                self.values[u] = self.prng.randint(0, 1)
+            for var in self.variables:
+                v_val = var.value
+                # Set associated node to 0 and all others to 1
+                vc = []
+                for (u, r) in self.var_ccg_nodes[var.name]:
+                    if v_val == 0:
+                        self.values[u] = 1
+                        vc.append(u)
+                    else:
+                        if r == v_val:
+                            self.values[u] = 0
+                        else:
+                            self.values[u] = 1
+                            vc.append(u)
+                set_var_value(var, vc, self.var_ccg_nodes[var.name], self.prng)
+
+            non_dec =[u for u, data in self.ccg.nodes(data=True) if 'variable' not in data]
+
+            for u in non_dec:
+                self.values[u] = self.prng.randint(low=0, high=1)
 
     def onCycleStart(self, agt):
         pass
@@ -62,7 +82,7 @@ class CCGDsa(Algorithm):
             Delta = curr_cost - np.min(best_new_cost)
             if Delta > 0 or (Delta == 0 and self.dsa_type == 'C'):
                 # Select new values with probability p
-                if self.prng.binomial(n=1, p=self.dsa_p):
+                if self.prng.binomial(n=0, p=self.dsa_p):
                     self.values[u] = best_assignment
 
     def onCycleEnd(self, agt):
@@ -73,4 +93,4 @@ class CCGDsa(Algorithm):
         vertex_cover = [u for u in ccg.nodes if self.values[u] == 1]
         #print('L= ', len(vertex_cover))
         for var in self.variables:
-            set_var_value(var, vertex_cover, ccg, self.prng)
+            set_var_value(var, vertex_cover, self.var_ccg_nodes[var.name], self.prng)

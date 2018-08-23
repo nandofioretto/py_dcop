@@ -230,7 +230,7 @@ def make_gadgets(G, dcop_instance):
 
     return G_agts
 
-def set_var_value(var, vc, ccg, prng=np.random):
+def set_var_value(var, vc, var_ccg, prng=np.random):
     """
     Get the value of a variable.
     :param var: The variable of interest.
@@ -244,9 +244,8 @@ def set_var_value(var, vc, ccg, prng=np.random):
     else:  # Non-Boolean variable
         # Get all nodes relevant to the variable of interest. We shouldn't need to find all such
         # pairs, but this would be easier for debugging.
-        node_rank_pairs = tuple(
-            data['rank'] for u, data in ccg.nodes(data=True)
-                      if ('variable' in data and data['variable'] == var.name and u not in vc))
+        node_rank_pairs = [r for (u, r) in var_ccg if u not in vc]
+
         #assert(len(node_rank_pairs) <= 1)
         N = len(node_rank_pairs)
         if len(node_rank_pairs) == 0:

@@ -13,19 +13,22 @@ class Algorithm:
         self.num_messages_sent = 0
         self.curr_runtime = 0
         self.curr_cost = 0
+        self.stats = StatsCollector()
 
     def run(self):
+        self.curr_iteration = 0
+        self.curr_cost = 0
         start_time = time.time()
         for agtId in self.instance.agents:
             agt = self.instance.agents[agtId]
             self.onStart(agt)
         self.curr_runtime = time.time() - start_time
-        StatsCollector.updateIterStats(self)
+        self.stats.updateIterStats(self)
 
         while not self.terminationCondition():
             self.runIteration()
             self.curr_runtime = time.time() - start_time
-            StatsCollector.updateIterStats(self)
+            self.stats.updateIterStats(self)
 
         for agtId in self.instance.agents:
             agt = self.instance.agents[agtId]

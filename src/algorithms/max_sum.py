@@ -25,7 +25,7 @@ class MaxSum(Algorithm):
                 self.msg_from_con_to_var[con.name][var.name] = np.zeros(len(var.domain))
 
         # First Iteration: Set random assignment
-        agt.setRandomAssignment()
+        #agt.setRandomAssignment()
         agt.state.copyAgtAssignmentToState()
 
     def onCycleStart(self, agt):
@@ -74,7 +74,7 @@ class MaxSum(Algorithm):
             table_var_to_con -= np.min(table_var_to_con)
             #table_var_to_con -= np.mean(table_var_to_con)
             # Add noise to help stabilizing convergence
-            table_var_to_con += np.abs(Mailer.prng.normal(scale=1.0, size=len(table_var_to_con)))
+            table_var_to_con += np.abs(Mailer.prng.normal(scale=20.0, size=len(table_var_to_con)))
             # Send message to constraint
             Mailer.num_messages_sent += 1
             if Mailer.damping > 0:

@@ -15,9 +15,24 @@ class CCGCentralized(Algorithm):
         self.msgs = {u: {v: np.asarray([0,0]) for v in self.ccg.neighbors(u)} for u in self.ccg.nodes()}
         self.root = min([aname for aname in dcop_instance.agents])
         self.variables = dcop_instance.variables.values()
+        self.var_ccg_nodes = {vname : [(u, data['rank']) for u, data in self.ccg.nodes(data=True)
+                                                         if ('variable' in data and data['variable'] == vname)]
+                                for vname in dcop_instance.variables}
 
     def onStart(self, agt):
-        agt.setRandomAssignment()
+        #agt.setRandomAssignment()
+
+        self.msgs = {u: {v: np.asarray([0,0]) for v in self.ccg.neighbors(u)} for u in self.ccg.nodes()}
+
+        if agt.name is self.root:
+            for var in self.variables:
+                v_val = var.value
+                # Set associated node to 0 and all others to 1
+                vc = []
+                for (u, r) in self.var_ccg_nodes[var.name]:
+                    if v_val == 0 or v_val != 0 and r != v_val:
+                        vc.append(u)
+                set_var_value(var, vc, self.var_ccg_nodes[var.name], self.prng)
 
     def onCycleStart(self, agt):
         pass
@@ -65,7 +80,7 @@ class CCGCentralized(Algorithm):
                 vertex_cover.append(u)
 
         for var in self.variables:
-            set_var_value(var, vertex_cover, self.ccg, self.prng)
+            set_var_value(var, vertex_cover, self.var_ccg_nodes[var.name], self.prng)
 
     def onTermination(self, agt):
         pass

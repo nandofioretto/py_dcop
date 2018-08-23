@@ -34,7 +34,7 @@ from core.agent import Agent
 from core.constraint import Constraint
 from core.dcop_instance import DCOPInstance
 from utils.utils import takeMin, insertInTuple
-from utils.ccg_utils import transform_dcop_instance_to_ccg, make_gadgets
+from utils.ccg_utils import transform_dcop_instance_to_ccg, make_gadgets, set_var_value
 
 
 class CCGMaxSum(Algorithm):
@@ -47,11 +47,25 @@ class CCGMaxSum(Algorithm):
         self.agt_ccg = make_gadgets(self.ccg, dcop_instance)
         self.agt_ccg_nodes = {}
 
+        self.var_ccg_nodes = {vname : [(u, data['rank']) for u, data in self.ccg.nodes(data=True)
+                                                         if ('variable' in data and data['variable'] == vname)]
+                                for vname in dcop_instance.variables}
+
+
     def onStart(self, agt):
-        agt.setRandomAssignment()
+        #agt.setRandomAssignment()
         ccg = self.agt_ccg[agt.name]
         self.agt_ccg_nodes[agt.name] = [u for u, data in ccg.nodes(data=True)
                                         if 'owner' in data and data['owner'] == agt.name]
+
+        for var in agt.variables:
+            v_val = var.value
+            vc = []
+            # Set associated node to 0 and all others to 1
+            for (u, r) in self.var_ccg_nodes[var.name]:
+                if v_val == 0 or v_val != 0 and r != v_val:
+                    vc.append(u)
+            set_var_value(var, vc, self.var_ccg_nodes[var.name], self.prng)
 
     def onCycleStart(self, agt):
         pass
@@ -98,33 +112,7 @@ class CCGMaxSum(Algorithm):
             #     vertex_cover.append(u)
 
         for var in agt.variables:
-            self.setVarValue(var, vertex_cover)
+            set_var_value(var, vertex_cover, self.var_ccg_nodes[var.name], self.prng)
 
     def onTermination(self, agt):
         pass
-
-    def setVarValue(self, var, vc):
-        """
-        Get the value of a variable.
-        :param var: The variable of interest.
-        :param vc: The computed vertex cover, which is a set of nodes.
-        """
-        ccg = self.agt_ccg[var.controlled_by.name]
-
-        if len(var.domain) == 2:  # Boolean variable
-            for u, data in ccg.nodes(data=True):
-                if 'variable' in data and data['variable'] == var.name:
-                    assert(data['rank'] == 0)
-                    var.setAssignment(1 if u in vc else 0)
-        else:  # Non-Boolean variable
-            # Get all nodes relevant to the variable of interest. We shouldn't need to find all such
-            # pairs, but this would be easier for debugging.
-            node_rank_pairs = tuple(
-                data['rank'] for u, data in ccg.nodes(data=True)
-                          if ('variable' in data and data['variable'] == var.name and u not in vc))
-            #assert(len(node_rank_pairs) <= 1)
-            N = len(node_rank_pairs)
-            if N == 0:
-                var.setAssignment(0)
-            else:
-                var.setAssignment(node_rank_pairs[-1])#self.prng.randint(0, N)])

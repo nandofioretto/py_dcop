@@ -3,7 +3,7 @@ import numpy as np
 class Variable:
     def __init__(self, name, domain=[], type='decision', seed=1234):
         self.name = name
-        self.value = None
+        self.value = 0
         self.type = type
         self.domain = domain.copy()
         self.constraints = []

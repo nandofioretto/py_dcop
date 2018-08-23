@@ -9,7 +9,7 @@ class Dsa(Algorithm):
 
     def onStart(self, agt):
         # First Iteration: Set random assignment
-        agt.setRandomAssignment()
+        #agt.setRandomAssignment()
         agt.state.copyAgtAssignmentToState()
 
     def onCurrentCycle(self, agt):

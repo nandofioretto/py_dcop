@@ -15,18 +15,31 @@ if __name__ == '__main__':
     g_gen = DCOPGenerator(seed=1234)
     dcop = DCOPInstance()
 
-    graph = g_gen.random_graph(nnodes=10, p1=0.6)
+    graph = g_gen.random_graph(nnodes=40, p1=0.2)
+    print('graph - nodes: ', graph.number_of_nodes(), ' edges:', graph.number_of_edges())
     #graph = g_gen.regular_grid(nnodes=5)
     #graph = g_gen.scale_free(nnodes=20)
     dcop.generate_from_graph(G=graph, dsize=5, max_clique_size=2, cost_range=(0, 10))
 
-    algorithm = Dsa('dsa', dcop, {'max_iter':100, 'type': 'C', 'p': 0.01})
-    #algorithm = MaxSum('maxsum', dcop, {'max_iter': 100, 'damping': 0.9})
-    #algorithm  = CCGMaxSum('ccg-maxsum', dcop, {'max_iter': 100, 'damping': 0.9}, seed=1234)
-    #algorithm  = CCGCentralized('ccg-maxsum-c', dcop, {'max_iter': 100, 'damping': 0.9}, seed=1234)
-    #algorithm = CCGDsa('ccg-dsa', dcop, {'max_iter':100, 'type': 'C', 'p': 0.01})
-    #algorithm = LPSolver('lp', dcop, {'max_iter':1, 'relax': True})
-    algorithm.run()
-    StatsCollector.printSummary(anytime=True)
+    dsa = Dsa('dsa', dcop, {'max_iter': 10, 'type': 'C', 'p': 0.7})
+    #maxsum = MaxSum('maxsum', dcop, {'max_iter': 10, 'damping': 0.7})
+    #ccg_maxsum_c = CCGCentralized('ccg-maxsum-c', dcop, {'max_iter': 10, 'damping': 0.9}, seed=1234)
+    #ccg_maxsum = CCGMaxSum('ccg-maxsum', dcop, {'max_iter': 10, 'damping': 0.7}, seed=1234)
+    ccg_dsa = CCGDsa('ccg-dsa', dcop, {'max_iter':10, 'type': 'C', 'p': 0.7})
 
+    for i in range(10):
+        dsa.run()               # 394
+        #maxsum.run()           # 393
+        #ccg_maxsum_c.run()     # 381
+        #for v in dcop.variables.values(): v.setRandomAssignment()    # 371
+        #ccg_maxsum.run()       # 375 (damping = 0)
+        ccg_dsa.run()          # 394
+
+
+
+    #algorithm.stats.printSummary(anytime=True)
         # 545
+
+    # dsa = 333 / 357
+    # maxsum = 445
+    # ccg-dsa = 421 (1000 -- but was improving...)
