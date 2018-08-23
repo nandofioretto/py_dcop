@@ -38,11 +38,14 @@ from utils.ccg_utils import transform_dcop_instance_to_ccg, make_gadgets, set_va
 
 
 class CCGMaxSum(Algorithm):
-    def __init__(self, name, dcop_instance, args={'max_iter':10, 'damping':0}, seed=1234):
+    def __init__(self, name, dcop_instance, args={'max_iter':10, 'damping':0}, ccg=None, seed=1234):
         super(CCGMaxSum, self).__init__(name, dcop_instance, args, seed)
         self.damping = args['damping']
 
-        self.ccg = transform_dcop_instance_to_ccg(dcop_instance)
+        if ccg is not None:
+            self.ccg = ccg
+        else:
+            self.ccg = transform_dcop_instance_to_ccg(dcop_instance)
         self.msgs = {u: {v: np.asarray([0,0]) for v in self.ccg.neighbors(u)} for u in self.ccg.nodes()}
         self.agt_ccg = make_gadgets(self.ccg, dcop_instance)
         self.agt_ccg_nodes = {}

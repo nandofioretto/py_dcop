@@ -5,12 +5,15 @@ from algorithms.algorithm import Algorithm
 from utils.ccg_utils import transform_dcop_instance_to_ccg, set_var_value
 
 class CCGDsa(Algorithm):
-    def __init__(self, name, dcop_instance, args={'max_iter':10, 'type': 'A', 'p': 0.7}, seed=1234):
-        super(CCGDsa, self).__init__(name, dcop_instance, args)
+    def __init__(self, name, dcop_instance, args={'max_iter':10, 'type': 'A', 'p': 0.7}, ccg=None, seed=1234):
+        super(CCGDsa, self).__init__(name, dcop_instance, args, seed)
         self.dsa_type = args['type']
         self.dsa_p    = args['p']
 
-        self.ccg = transform_dcop_instance_to_ccg(dcop_instance)
+        if ccg is not None:
+            self.ccg = ccg
+        else:
+            self.ccg = transform_dcop_instance_to_ccg(dcop_instance)
         self.root = min([aname for aname in dcop_instance.agents])
         self.view = {u: 0 for u in self.ccg.nodes()}
         self.values = {u: 0 for u in self.ccg.nodes()}
@@ -38,7 +41,7 @@ class CCGDsa(Algorithm):
                         else:
                             self.values[u] = 1
                             vc.append(u)
-                set_var_value(var, vc, self.var_ccg_nodes[var.name], self.prng)
+                #set_var_value(var, vc, self.var_ccg_nodes[var.name], self.prng)
 
             non_dec =[u for u, data in self.ccg.nodes(data=True) if 'variable' not in data]
 

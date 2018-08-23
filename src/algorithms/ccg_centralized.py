@@ -7,11 +7,14 @@ from utils.ccg_utils import transform_dcop_instance_to_ccg, set_var_value
 
 class CCGCentralized(Algorithm):
 
-    def __init__(self, name, dcop_instance, args={'max_iter':10, 'damping':0}, seed=1234):
+    def __init__(self, name, dcop_instance, args={'max_iter':10, 'damping':0}, ccg=None, seed=1234):
         super(CCGCentralized, self).__init__(name, dcop_instance, args, seed)
         self.damping = args['damping']
 
-        self.ccg = transform_dcop_instance_to_ccg(dcop_instance)
+        if ccg is not None:
+            self.ccg = ccg
+        else:
+            self.ccg = transform_dcop_instance_to_ccg(dcop_instance)
         self.msgs = {u: {v: np.asarray([0,0]) for v in self.ccg.neighbors(u)} for u in self.ccg.nodes()}
         self.root = min([aname for aname in dcop_instance.agents])
         self.variables = dcop_instance.variables.values()
@@ -22,7 +25,8 @@ class CCGCentralized(Algorithm):
     def onStart(self, agt):
         #agt.setRandomAssignment()
 
-        self.msgs = {u: {v: np.asarray([0,0]) for v in self.ccg.neighbors(u)} for u in self.ccg.nodes()}
+        self.msgs = {u: {v: self.prng.randint(10, size=2)
+                         for v in self.ccg.neighbors(u)} for u in self.ccg.nodes()}
 
         if agt.name is self.root:
             for var in self.variables:

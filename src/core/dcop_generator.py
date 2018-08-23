@@ -30,14 +30,19 @@ class DCOPGenerator:
 
     def random_graph(self, nnodes, p1):
         assert 0 < p1 <= 1
-        nedges = p1 * ((nnodes * (nnodes - 1)) / 2)
+        nedges = max(p1 * ((nnodes * (nnodes - 1)) / 2), nnodes)
         G = nx.Graph()
         nodes = list(range(nnodes))
         G.add_nodes_from(nodes)
 
+        while G.number_of_edges() < nedges:
+            u, v = sorted(self.prng.choice(nodes, size=2, replace=False))
+            if not G.has_edge(u, v):
+                G.add_edge(u, v)
+
         while not nx.is_connected(G):
-            while G.number_of_edges() < nedges:
-                u, v = sorted(self.prng.choice(nodes, size=2, replace=False))
-                if not G.has_edge(u, v):
-                    G.add_edge(u, v)
+            u, v = sorted(self.prng.choice(nodes, size=2, replace=False))
+            if not G.has_edge(u, v):
+                G.add_edge(u, v)
+
         return G

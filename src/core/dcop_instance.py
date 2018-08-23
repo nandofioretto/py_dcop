@@ -101,15 +101,15 @@ class DCOPInstance:
 
         # Generate constraints - one for each clique
         i = 0
-        for clique in G.edges(): #nx.find_cliques(G):
+        #for clique in G.edges():
+        for clique in nx.find_cliques(G):
             clique = sorted(clique)
-            name = 'c_' + str(i)
             if len(clique) <= max_clique_size:
-                self._create_constraint(name, clique, cost_range)
+                self._create_constraint('c_' + str(i), clique, cost_range, p2)
                 i += 1
             else:
                 for bincon in combinations(clique, 2):
-                    self._create_constraint(name, bincon, cost_range)
+                    self._create_constraint('c_' + str(i), bincon, cost_range, p2)
                     i += 1
 
         # Generate Agents
@@ -122,21 +122,23 @@ class DCOPInstance:
             for ai, aj in permutations(agt_clique, 2):
                 ai.addNeighbor(aj, self.constraints[con])
 
-
     def _create_variables(self, n, dsize):
         vname = 'v_' + str(n)
         domain = list(range(dsize))
         self.variables[vname] = Variable(name=vname, domain=domain, type='decision')
 
-    def _create_constraint(self, name, clique, cost_range):
+    def _create_constraint(self, name, clique, cost_range, p2=1.0):
         scope = ['v_' + str(ci) for ci in clique]
         domains = [self.variables[vname].domain for vname in scope]
         all_tuples = product(*domains)
         n = reduce(operator.mul, map(len, domains), 1)
-        costs = self.prng.randint(low=cost_range[0], high=cost_range[1], size=n)
+        costs = self.prng.randint(low=cost_range[0], high=cost_range[1], size=n).astype(float)
+        violations = int((1-p2) * n)
+        for i in self.prng.randint(low=0, high=n, size=violations):
+            costs[i] = 9999999
         con_values = {T: costs[i] for i, T in enumerate(all_tuples)}
         self.constraints[name] = Constraint(name,
-                                            scope=[self.variables[vid] for vid in scope],
+                                            scope=[self.variables[vname] for vname in scope],
                                             values=con_values)
         # add constriant to variables
         for vid in scope:
