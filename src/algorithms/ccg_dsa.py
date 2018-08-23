@@ -14,15 +14,16 @@ class CCGDsa(Algorithm):
         self.root = min([aname for aname in dcop_instance.agents])
         self.view = {u: 0 for u in self.ccg.nodes()}
         self.values = {u: 0 for u in self.ccg.nodes()}
-        self.variables = dcop_instance.variables
+        self.variables = dcop_instance.variables.values()
 
 
     def onStart(self, agt):
         # First Iteration: Set random assignment
-        if agt.name is not self.root:
-            return
-        for u in self.ccg.nodes():
-            self.values[u] = self.prng.randint(0, 1)
+        agt.setRandomAssignment()
+
+        if agt.name is self.root:
+            for u in self.ccg.nodes():
+                self.values[u] = self.prng.randint(0, 1)
 
     def onCycleStart(self, agt):
         pass
@@ -32,10 +33,14 @@ class CCGDsa(Algorithm):
             return
 
         def evaluate(u, val_u, ccg, u_view, weights):
-            if val_u == 0 and any(u_view[v] for v in ccg.neighbors(u)):
-                return np.inf
-            else:
-                return np.sum(self.view[v] * weights[v] for v in ccg.neighbors(u)) + val_u * weights[u]
+            sum_cost = np.sum(u_view[v] * weights[v] for v in ccg.neighbors(u)) + val_u * weights[u]
+            if val_u == 0 and any(u_view[v] == 0 for v in ccg.neighbors(u)):
+                sum_cost += 1 * [u_view[v] for v in ccg.neighbors(u)].count(0)
+            return sum_cost
+            # if val_u == 0 and any(u_view[v] == 0 for v in ccg.neighbors(u)):
+            #     return np.inf
+            # else:
+            #     return np.sum(self.view[v] * weights[v] for v in ccg.neighbors(u)) + val_u * weights[u]
 
         ccg = self.ccg
         weights = nx.get_node_attributes(ccg, 'weight')
@@ -44,6 +49,7 @@ class CCGDsa(Algorithm):
             # Receive values into view:
             for v in ccg.neighbors(u):
                 self.view[v] = self.values[v]
+                self.num_messages_sent += 1
 
             # Get best value:
             curr_cost = evaluate(u, self.values[u], ccg, self.view, weights)
@@ -53,7 +59,7 @@ class CCGDsa(Algorithm):
             best_assignment = np.argmin(best_new_cost)
 
             # We want to minimize so we want that new cost < currCost
-            Delta = curr_cost - best_new_cost
+            Delta = curr_cost - np.min(best_new_cost)
             if Delta > 0 or (Delta == 0 and self.dsa_type == 'C'):
                 # Select new values with probability p
                 if self.prng.binomial(n=1, p=self.dsa_p):
@@ -65,5 +71,6 @@ class CCGDsa(Algorithm):
 
         ccg = self.ccg
         vertex_cover = [u for u in ccg.nodes if self.values[u] == 1]
+        #print('L= ', len(vertex_cover))
         for var in self.variables:
             set_var_value(var, vertex_cover, ccg, self.prng)

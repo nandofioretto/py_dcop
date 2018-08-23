@@ -138,6 +138,7 @@ def transform_dcop_instance_to_ccg(instance: DCOPInstance) -> nx.Graph:
             else:
                 ccg.nodes[ver]['rank'] = i + 1
 
+    print('Number of CCG Nodes:', ccg.number_of_nodes())
     return ccg
 
 # Not used
@@ -228,7 +229,6 @@ def make_gadgets(G, dcop_instance):
     #         add_node_from(G_agts[a], G, n2)
 
     return G_agts
-
 
 def set_var_value(var, vc, ccg, prng=np.random):
     """

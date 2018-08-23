@@ -39,7 +39,9 @@ class Agent:
             var.setAssignment(self.state.variables_assignments[var.name])
 
     def __str__(self):
-        return 'agent: ' + str(self.name) + '\t controls:' \
+        return 'agent: ' + str(self.name) \
+               + '\tN='+ str([a.name for a in self.neighbors]) \
+               + '\t controls:' \
                + str([var.name for var in self.variables]) \
                + ' constraints: ' + str([con.name for con in self.constraints]) \
                + ' controlled: ' + str([con.name for con in self.controlled_constraints])

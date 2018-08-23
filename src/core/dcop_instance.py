@@ -2,7 +2,7 @@ import json
 import os
 import networkx as nx
 import numpy as np
-from itertools import product, permutations
+from itertools import product, permutations, combinations
 from functools import reduce
 import operator
 
@@ -11,8 +11,9 @@ from core.constraint import Constraint
 from core.agent import Agent
 
 class DCOPInstance:
-    def __init__(self, filepath=None):
+    def __init__(self, seed=1234, filepath=None):
         self.data = None
+        self.prng = np.random.RandomState(seed)
         self.agents = {}
         self.variables = {}
         self.constraints = {}
@@ -94,49 +95,58 @@ class DCOPInstance:
         :param seed:
         :return:
         """
-        prng = np.random.RandomState(seed)
-
         # Generate Variables
         for n in G.nodes:
-            vname = 'v_' + str(n)
-            domain = list(range(dsize))
-            self.variables[vname] = Variable(name=vname, domain=domain, type='decision')
+            self._create_variables(n, dsize)
 
         # Generate constraints - one for each clique
-        cliques = list(nx.find_cliques(G))
-        for i, clique in enumerate(cliques):
-            if len(clique) > max_clique_size:
-                print('Skipping constraints! Fix!')
-                continue
+        i = 0
+        for clique in G.edges(): #nx.find_cliques(G):
+            clique = sorted(clique)
             name = 'c_' + str(i)
-            scope = ['v_' + str(ci) for ci in clique]
-            domains = [self.variables[vname].domain for vname in scope]
-            all_tuples = product(*domains)
-            n = reduce(operator.mul, map(len, domains), 1)
-            costs = prng.randint(low=cost_range[0], high=cost_range[1], size=n)
-            con_values = {T: costs[i] for i, T in enumerate(all_tuples)}
-            self.constraints[name] = Constraint(name,
-                                                scope=[self.variables[vid] for vid in scope],
-                                                values=con_values)
-            # add constriant to variables
-            for vid in scope:
-                self.variables[vid].addConstraint(self.constraints[name])
+            if len(clique) <= max_clique_size:
+                self._create_constraint(name, clique, cost_range)
+                i += 1
+            else:
+                for bincon in combinations(clique, 2):
+                    self._create_constraint(name, bincon, cost_range)
+                    i += 1
 
         # Generate Agents
         for n in G.nodes:
-            name, vid = 'a_' + str(n), 'v_' + str(n)
-            agt_constraints = []
-            for clique in self.variables[vid].constraints:
-                if clique not in agt_constraints:
-                    agt_constraints.append(clique)
-                    self.agents[name] = Agent(name, variables=[self.variables[vid]], constraints=agt_constraints)
-            self.variables[vid].setOwner(self.agents[name])
+            self._create_agents(n)
 
         # Connect neighbors:
         for con in self.constraints:
-            clique = [var.controlled_by for var in self.constraints[con].scope]
-            for ai, aj in permutations(clique, 2):
+            agt_clique = [var.controlled_by for var in self.constraints[con].scope]
+            for ai, aj in permutations(agt_clique, 2):
                 ai.addNeighbor(aj, self.constraints[con])
+
+
+    def _create_variables(self, n, dsize):
+        vname = 'v_' + str(n)
+        domain = list(range(dsize))
+        self.variables[vname] = Variable(name=vname, domain=domain, type='decision')
+
+    def _create_constraint(self, name, clique, cost_range):
+        scope = ['v_' + str(ci) for ci in clique]
+        domains = [self.variables[vname].domain for vname in scope]
+        all_tuples = product(*domains)
+        n = reduce(operator.mul, map(len, domains), 1)
+        costs = self.prng.randint(low=cost_range[0], high=cost_range[1], size=n)
+        con_values = {T: costs[i] for i, T in enumerate(all_tuples)}
+        self.constraints[name] = Constraint(name,
+                                            scope=[self.variables[vid] for vid in scope],
+                                            values=con_values)
+        # add constriant to variables
+        for vid in scope:
+            self.variables[vid].addConstraint(self.constraints[name])
+
+    def _create_agents(self, n):
+        name, vid = 'a_' + str(n), 'v_' + str(n)
+        self.agents[name] = Agent(name, variables=[self.variables[vid]],
+                                  constraints=self.variables[vid].constraints)
+        self.variables[vid].setOwner(self.agents[name])
 
     def to_file(self, fileout):
         """
