@@ -8,47 +8,47 @@ cd ${py_dcop_home}
 seeds=(10 20 30 40 50 60 70 80 90 100)
 for seed in ${seeds[@]}; do
     dcop_file="${py_dcop_home}/data/in/sf_${seed}.json"
-    python src/py_dcop2.py --nagents=100 --domsize=3 --seed=${seed} --graph=\"sf\" --fileout=\"${dcop_file}\"
-     for alg in ${algorithms[@]}; do
+    python src/py_dcop2.py --nagents=100 --domsize=3 --seed=${seed} --graph="sf" --fileout="${dcop_file}"
+
+	for alg in ${algorithms[@]}; do
 	 	echo "sf " $alg " seed " $seed
-	 	python src/py_dcop2.py --algorithm=\"${alg}\" \
+	 	echo python src/py_dcop2.py --algorithm=\"${alg}\" \
 	 	       --iterations=5000 \
 	 	       --seed=${seed} \
 	 	       --filein=\"${dcop_file}\" \
 	 	       --fileout=\"${py_dcop_home}/data/out/${alg}_sf_s${seed}_.csv\"
-     done
+	done
     
-
-    dcop_file="${py_dcop_home}/data/in/grid_${seed}.json"
-    python src/py_dcop2.py --nagents=100 --domsize=3 --seed=${seed} --graph=\"grid\" --fileout=\"${dcop_file}\"
-    for alg in ${algorithms[@]}; do
-	    echo "grid " $alg " seed " $seed
-	 	python src/py_dcop2.py --algorithm=\"${alg}\" \
-	 	       --iterations=5000 \
-	 	       --seed=${seed} \
-	 	       --filein=\"${dcop_file}\" \
-	 	       --fileout=\"${py_dcop_home}/data/out/${alg}_grid_s${seed}_.csv\"
-     done
-    
-    dcop_file="${py_dcop_home}/data/in/rand-sparse_${seed}.json"
-    python src/py_dcop2.py --nagents=100 --domsize=3 --seed=${seed} --graph=\"rand-sparse\" --fileout=\"${dcop_file}\"
-    for alg in ${algorithms[@]}; do
-	echo "rand sparse " $alg " seed " $seed
-		python src/py_dcop2.py --algorithm=\"${alg}\" \
-	 	       --iterations=5000 \
-	 	       --seed=${seed} \
-	 	       --filein=\"${dcop_file}\" \
-		       --fileout=\"${py_dcop_home}/data/out/${alg}_rand_sparse_s${seed}_.csv\"
-    done
-    
-   dcop_file="${py_dcop_home}/data/in/rand-dense_${seed}.json"
-   python src/py_dcop2.py --nagents=100 --domsize=3 --seed=${seed} --graph=\"rand-dense\" --fileout=\"${dcop_file}\"
-   for alg in ${algorithms[@]}; do
-	echo "rand dense " $alg " seed " $seed
-		python src/py_dcop2.py --algorithm=\"${alg}\" \
-	 	       --iterations=5000 \
-	 	       --seed=${seed} \
-	 	       --filein=\"${dcop_file}\" \
-		       --fileout=\"${py_dcop_home}/data/out/${alg}_rand_dense_s${seed}_.csv\"
-   done
+	#     dcop_file="${py_dcop_home}/data/in/grid_${seed}.json"
+	#     python src/py_dcop2.py --nagents=100 --domsize=3 --seed=${seed} --graph="grid" --fileout=\"${dcop_file}\"
+	#     for alg in ${algorithms[@]}; do
+	#     echo "grid " $alg " seed " $seed
+	#  	python src/py_dcop2.py --algorithm=\"${alg}\" \
+	#  	       --iterations=5000 \
+	#  	       --seed=${seed} \
+	#  	       --filein=\"${dcop_file}\" \
+	#  	       --fileout=\"${py_dcop_home}/data/out/${alg}_grid_s${seed}_.csv\"
+	#      done
+	#
+	#     dcop_file="${py_dcop_home}/data/in/rand-sparse_${seed}.json"
+	#     python src/py_dcop2.py --nagents=100 --domsize=3 --seed=${seed} --graph="rand-sparse" --fileout=\"${dcop_file}\"
+	#     for alg in ${algorithms[@]}; do
+	# echo "rand sparse " $alg " seed " $seed
+	# 	python src/py_dcop2.py --algorithm=\"${alg}\" \
+	#  	       --iterations=5000 \
+	#  	       --seed=${seed} \
+	#  	       --filein=\"${dcop_file}\" \
+	# 	       --fileout=\"${py_dcop_home}/data/out/${alg}_rand_sparse_s${seed}_.csv\"
+	#     done
+	#
+	#    dcop_file="${py_dcop_home}/data/in/rand-dense_${seed}.json"
+	#    python src/py_dcop2.py --nagents=100 --domsize=3 --seed=${seed} --graph="rand-dense" --fileout=\"${dcop_file}\"
+	#    for alg in ${algorithms[@]}; do
+	# echo "rand dense " $alg " seed " $seed
+	# 	python src/py_dcop2.py --algorithm=\"${alg}\" \
+	#  	       --iterations=5000 \
+	#  	       --seed=${seed} \
+	#  	       --filein=\"${dcop_file}\" \
+	# 	       --fileout=\"${py_dcop_home}/data/out/${alg}_rand_dense_s${seed}_.csv\"
+	#    done
 done

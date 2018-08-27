@@ -68,7 +68,7 @@ class CCGDsa(Algorithm):
         ccg = self.ccg
         weights = nx.get_node_attributes(ccg, 'weight')
 
-        for u in ccg.nodes:
+        for u in ccg.nodes():
             # Receive values into view:
             for v in ccg.neighbors(u):
                 self.view[v] = self.values[v]
@@ -93,7 +93,7 @@ class CCGDsa(Algorithm):
             return
 
         ccg = self.ccg
-        vertex_cover = [u for u in ccg.nodes if self.values[u] == 1]
+        vertex_cover = [u for u in ccg.nodes() if self.values[u] == 1]
         #print('L= ', len(vertex_cover))
         for var in self.variables:
             set_var_value(var, vertex_cover, self.var_ccg_nodes[var.name], self.prng)
