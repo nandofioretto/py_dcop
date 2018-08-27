@@ -33,6 +33,7 @@ class DCOPInstance:
         return np.sum(self.constraints[con].evaluate() for con in self.constraints)
 
     def _read_json(self, filepath):
+        print('Importing file', filepath)
         with open(filepath) as f:
             data = json.load(f)
 
