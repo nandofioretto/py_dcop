@@ -274,13 +274,13 @@ int main(int argc, const char** argv)
         case 'l':
         {
             MWVCSolverLinearProgramming<> mslp(new LinearProgramSolverGurobi());
-            mslp.solve(g, assignments);
+            mslp.solve(g, assignments, instance);
             break;
         }
         case 'm':
         {
             MWVCSolverMessagePassing<> msmp(1e-6);
-            msmp.solve(g, assignments);
+            msmp.solve(g, assignments, instance);
             break;
         }
         }

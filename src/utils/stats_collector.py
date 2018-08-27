@@ -28,6 +28,15 @@ class StatsCollector:
                   StatsCollector.best_cost if anytime else s['cost'], sep='\t\t')
 
     @staticmethod
+    def addIterStats(algname, itr, cost, msgs, time):
+        StatsCollector.iter_stats.append({'alg': algname,
+                           'iteration': itr,
+                           'messages': msgs,
+                           'time': time,
+                           'cost': cost})
+
+
+    @staticmethod
     def printSummary(anytime=True):
         print('alg\titer\tmsgs\ttime\tcost')
         best_cost = np.inf

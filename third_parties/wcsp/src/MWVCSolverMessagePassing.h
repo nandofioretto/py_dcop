@@ -30,11 +30,15 @@
 #include <map>
 #include <utility>
 #include <tuple>
+#include <chrono>
 
 #include <boost/any.hpp>
 
 #include "ConstraintCompositeGraph.h"
 #include "MWVCSolver.h"
+#include "WCSPInstance.h"
+
+using namespace std;
 
 /** The MWVC solver that uses the min-sum message passing algorithm as shown in \cite xkk17.
  *
@@ -64,9 +68,15 @@ public:
 
     /** \se{MWVCSolver::solve} */
     virtual double solve(const graph_t& g,
-                         typename std::map<typename CCG::variable_id_t, bool>& out)
+                         typename std::map<typename CCG::variable_id_t, bool>& out,
+                          WCSPInstance<> instance)
+
     {
         using namespace boost;
+	std::cout << "ccg-maxsum-results-start\n";
+	
+        /* initialize random seed: */
+        srand (time(NULL));
 
         if (num_vertices(g) == 0)
             return 0.0;
@@ -91,7 +101,18 @@ public:
         }
 
         bool converged = false;
+        double total_weight = 0.0;
         uintmax_t num_iterations = 0;
+        uintmax_t net_load = 0;
+        uintmax_t best_cost = 1e10;
+
+
+        typedef std::chrono::high_resolution_clock Time;
+        typedef std::chrono::duration<float> fsec;
+
+        auto start = Time::now();
+ 
+
         do
         {
             if (RunningTime::GetInstance().isTimeOut())  // time's up
@@ -125,11 +146,27 @@ public:
 
                 m[1] = m2[0] < m2[1] ? m2[0] : m2[1];
 
+                auto old_m = msgs0[std::make_pair(v_from, v_to)];
+
+                // Add random noise to message
+                if (num_iterations > 100) {
+                   m[0] += rand() % 20 + 1;
+                   m[1] += rand() % 20 + 1;
+                }
+
+                double alpha = num_iterations < 200 ? 0.9 : 0.7;
+                m[0] = old_m[0] * alpha + m[0] * (1-alpha);
+                m[1] = old_m[1] * alpha + m[1] * (1-alpha);
+
+
                 auto m_min = m[0] < m[1] ? m[0] : m[1];
                 m[0] -= m_min;
                 m[1] -= m_min;
 
                 it.second = m;
+
+                net_load++;
+
 
                 // is it now convergent?
                 if (converged)
@@ -141,39 +178,80 @@ public:
                         converged = false;
                 }
             }
-        } while (!converged);
 
-        std::cout << "Number of iterations: " << num_iterations << std::endl;
+            fsec curr_time = Time::now() - start;
 
-        // compute the MWVC
-        double total_weight = 0.0;
-        converged = true;
-        for (auto it = vi; it != vi_end; ++ it)
-        {
-            weight_t min0 = 0, min1 = 0;
-            for (auto neighbors = adjacent_vertices(*it, g);
-                 neighbors.first != neighbors.second; ++ neighbors.first)
+
+
+            // compute the MWVC
+            double total_weight = 0.0;
+            converged = true;
+            for (auto it = vi; it != vi_end; ++ it)
             {
-                auto m = msgs.at(std::make_pair(*neighbors.first, *it));
-                min0 += m.at(0);
-                min1 += m.at(1);
+                weight_t min0 = 0, min1 = 0;
+                for (auto neighbors = adjacent_vertices(*it, g);
+                     neighbors.first != neighbors.second; ++ neighbors.first)
+                {
+                    auto m = msgs.at(std::make_pair(*neighbors.first, *it));
+                    min0 += m.at(0);
+                    min1 += m.at(1);
+                }
+
+                min1 += vertex_weight_map[*it];
+
+                auto id = vertex_id_map[*it];
+                if (std::isinf(min0) || std::isinf(min1))
+                    converged = false;
+                if (min0 > min1)
+                {
+                    if (id >= 0)
+                        out[id] = true;
+                    total_weight += vertex_weight_map[*it];
+                }
+                else
+                    if (id >= 0)
+                        out[id] = false;
             }
 
-            min1 += vertex_weight_map[*it];
-
-            auto id = vertex_id_map[*it];
-            if (std::isinf(min0) || std::isinf(min1))
-                converged = false;
-            if (min0 > min1)
+            std::map<WCSPInstance<>::variable_id_t, WCSPInstance<>::non_boolean_value_t> solution;
+            for (WCSPInstance<>::variable_id_t v = 0; v < instance.getNonBooleanVariables().size(); ++ v)
             {
-                if (id >= 0)
-                    out[id] = true;
-                total_weight += vertex_weight_map[*it];
+                const auto& bvs = instance.getNonBooleanVariables()[v];
+
+                // no assignment specified for bvs[0], which mean it can be any value (e.g., not in the
+                // WCSP). No need to modify solution.
+                if (out.count(bvs[0]) == 0)
+                    continue;
+
+                if (bvs.size() == 1)
+                {
+                    solution[v] = out.at(bvs[0]);
+                    continue;
+                }
+
+                auto false_v = std::find_if_not(
+                    bvs.begin(), bvs.end(),
+                    [&](ConstraintCompositeGraph<>::variable_id_t id){return out.at(id);});
+
+                if (false_v == bvs.end())  // No variable is false
+                    solution[v] = 0;
+                else
+                    solution[v] = std::distance(bvs.begin(), false_v) + 1;
             }
-            else
-                if (id >= 0)
-                    out[id] = false;
-        }
+
+            uintmax_t a = instance.computeTotalWeight(solution);
+            
+            if (best_cost > a) best_cost = a;
+            std::cout << num_iterations << "\t" << best_cost << "\t" << net_load << "\t" 
+                      << curr_time.count() << endl;
+
+            //std::cout << num_iterations << "\t" << instance.computeTotalWeight(out) << "\t" << net_load << std::endl;
+
+
+        } while (num_iterations < 5000);
+	std::cout << "ccg-maxsum-results-end\n";
+
+        // std::cout << "Number of iterations: " << num_iterations << std::endl;
 
         if (!converged)
             std::cout << "*** Message passing not converged! ***" << std::endl;

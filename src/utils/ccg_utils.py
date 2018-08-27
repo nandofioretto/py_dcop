@@ -33,6 +33,35 @@ def load_dimacs_to_networkx(s):
 
     return g
 
+def dcop_instance_to_dimacs(instance):
+    variable_ids = dict()
+    for i, (_, v) in enumerate(instance.variables.items()):
+        variable_ids[v.name] = str(i)
+
+    # Write input file for the CCG construction program
+    max_domain_size = max(len(v.domain) for _, v in instance.variables.items())
+    input_file = StringIO()
+    print('edges {} {} {} 9999999'.format(
+        len(instance.variables), max_domain_size, len(instance.constraints)),
+          file=input_file)
+    for _, v in instance.variables.items():
+        print(len(v.domain), end=' ', file=input_file)
+    print('', file=input_file)
+
+    for _, c in instance.constraints.items():
+        # constraint signature
+        print(len(c.scope), end=' ', file=input_file)
+        for v in c.scope:
+            print(variable_ids[v.name], end=' ', file=input_file)
+        print(c.default_value, end=' ', file=input_file)
+        print(len(c.values), file=input_file)
+
+        # tuples in the constraint
+        for vs, w in c.values.items():
+            print(' '.join(str(v) for v in vs) + ' ' + str(w), file=input_file)
+
+    return input_file    
+
 def transform_dcop_instance_to_ccg(instance: DCOPInstance) -> nx.Graph:
     """
     Transforms a DCOP instance into the associated CCG
@@ -74,7 +103,7 @@ def transform_dcop_instance_to_ccg(instance: DCOPInstance) -> nx.Graph:
             print(' '.join(str(v) for v in vs) + ' ' + str(w), file=input_file)
 
     # Call the CCG construction program. Change delete to False to view output files
-    with NamedTemporaryFile(mode='w+', encoding='utf-8', delete=True) as f:
+    with NamedTemporaryFile(mode='w+', encoding='utf-8', delete=False) as f:
         print(input_file.getvalue(), file=f, flush=True)
         print("Running " + ' '.join([CCG_EXECUTABLE_PATH, '-k', '-g', f.name]), file=sys.stderr)
         ccg_output = subprocess.check_output([CCG_EXECUTABLE_PATH, '-k', '-g', f.name],

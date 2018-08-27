@@ -85,12 +85,16 @@ utility
 -
 tuple
 -
+chrono
+-
 boost/any.hpp
 -
 ConstraintCompositeGraph.h
 /home/fioretto/Repos/py_dcop/third_parties/wcsp/src/ConstraintCompositeGraph.h
 MWVCSolver.h
 /home/fioretto/Repos/py_dcop/third_parties/wcsp/src/MWVCSolver.h
+WCSPInstance.h
+/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/WCSPInstance.h
 
 /home/fioretto/Repos/py_dcop/third_parties/wcsp/src/RunningTime.h
 chrono

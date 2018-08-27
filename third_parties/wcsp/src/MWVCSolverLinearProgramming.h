@@ -51,7 +51,8 @@ public:
 
     /** \se{MWVCSolver::solve} */
     virtual double solve(const typename CCG::graph_t& g,
-                         typename std::map<typename CCG::variable_id_t, bool>& out)
+                         typename std::map<typename CCG::variable_id_t, bool>& out,
+                         WCSPInstance<> instance)
     {
         using namespace boost;
 

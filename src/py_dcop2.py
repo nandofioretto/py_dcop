@@ -6,6 +6,8 @@ from algorithms.ccg_centralized import CCGCentralized
 from algorithms.ccg_dsa import CCGDsa
 from algorithms.rand import Rand
 from algorithms.lp_solver import LPSolver
+from utils.ccg_utils import dcop_instance_to_dimacs, CCG_EXECUTABLE_PATH
+from tempfile import NamedTemporaryFile
 
 from utils.stats_collector import StatsCollector
 from core.dcop_generator import DCOPGenerator
@@ -14,6 +16,12 @@ import argparse
 from tqdm import tqdm
 import pandas as pd
 import os
+from io import StringIO
+from tempfile import NamedTemporaryFile
+import subprocess
+import sys
+import re
+
 
 DATA_PATH = '/Users/nando/Repos/DCOP/py_dcop/data/'
 NEXPERIMEMTS = 5
@@ -92,9 +100,10 @@ if __name__ == '__main__':
     ## Run algorithms
     ##########################
     if algname is not None:
-        assert algname in ['dsa','maxsum','ccg-maxsum','ccg-maxsum-c','ccg-dsa', 'dsa&ccg-maxsum','dsa&ccg-maxsum-c','dsa&ccg-dsa', 'dsa&rand', 'lp'], parser.print_help()
+        assert algname in ['dsa','maxsum','ccg-maxsum','ccg-maxsum-c','ccg-dsa', 'dsa&ccg-maxsum','dsa&ccg-maxsum-c','dsa&ccg-dsa', 'dsa&rand', 'lp', 'ccg-maxsum+', 'ccg-maxsum+k'], parser.print_help()
 
         alg1, alg2 = None, None
+        r = max(1, iterations / 50)
         if algname == 'dsa':
             alg1 = Dsa('dsa', dcop, {'max_iter': iterations, 'type': 'C', 'p': 0.07}, seed=seed)
             n_rep = 1
@@ -105,30 +114,61 @@ if __name__ == '__main__':
             alg1 = CCGMaxSum('ccg-maxsum', dcop, {'max_iter': iterations, 'damping': 0.7}, seed=seed)
             n_rep = 1
         elif algname == 'ccg-maxsum-c':
-            alg1 = CCGCentralized('ccg-maxsum-c', dcop, {'max_iter': iterations, 'damping': 0.9}, seed=seed)
+            alg1 = CCGCentralized('ccg-maxsum-c', dcop, {'max_iter': iterations, 'damping': 0.7}, seed=seed)
             n_rep = 1
         elif algname ==  'ccg-dsa':
             alg1 = CCGDsa('ccg-dsa', dcop, {'max_iter':iterations, 'type': 'C', 'p': 0.7}, seed=seed)
             n_rep = 1
         elif algname == 'dsa&ccg-maxsum':
-            alg1 = Dsa('dsa', dcop, {'max_iter': 100, 'type': 'C', 'p': 0.7}, seed=seed)
-            alg2 = CCGMaxSum('ccg-maxsum', dcop, {'max_iter': 100, 'damping': 0.7}, seed=seed)
-            n_rep = int(iterations / 200)
+            alg1 = Dsa('dsa', dcop, {'max_iter': r, 'type': 'C', 'p': 0.7}, seed=seed)
+            alg2 = CCGMaxSum('ccg-maxsum', dcop, {'max_iter': r, 'damping': 0.7}, seed=seed)
+            n_rep = int(iterations / 2*r)
         elif algname == 'dsa&ccg-maxsum-c':
-            alg1 = Dsa('dsa', dcop, {'max_iter': 100, 'type': 'C', 'p': 0.7}, seed=seed)
-            alg2 = CCGCentralized('ccg-maxsum-c', dcop, {'max_iter': 100, 'damping': 0.9}, seed=seed)
-            n_rep = int(iterations / 200)
+            alg1 = Dsa('dsa', dcop, {'max_iter': r, 'type': 'C', 'p': 0.7}, seed=seed)
+            alg2 = CCGCentralized('ccg-maxsum-c', dcop, {'max_iter': r, 'damping': 0.9}, seed=seed)
+            n_rep = int(iterations / 2*r)
         elif algname == 'dsa&ccg-dsa':
-            alg1 = Dsa('dsa', dcop, {'max_iter': 100, 'type': 'C', 'p': 0.7}, seed=seed)
-            alg2 = CCGDsa('ccg-dsa', dcop, {'max_iter': 100, 'type': 'C', 'p': 0.7}, seed=seed)
-            n_rep = int(iterations / 200)
+            alg1 = Dsa('dsa', dcop, {'max_iter': r, 'type': 'C', 'p': 0.7}, seed=seed)
+            alg2 = CCGDsa('ccg-dsa', dcop, {'max_iter': r, 'type': 'C', 'p': 0.7}, seed=seed)
+            n_rep = int(iterations / 2*r)
         elif algname == 'dsa&rand':
-            alg1 = Dsa('dsa', dcop, {'max_iter': 100, 'type': 'C', 'p': 0.7}, seed=seed)
+            alg1 = Dsa('dsa', dcop, {'max_iter': r, 'type': 'C', 'p': 0.7}, seed=seed)
             alg2 = Rand('rand', dcop, {'max_iter': 1}, seed=seed)
-            n_rep = int(iterations / 200)
+            n_rep = int(iterations / 2*r)
         elif algname == 'lp':
             alg1 = LPSolver('rand', dcop, {'max_iter': 1, 'relax': True}, seed=seed)
             n_rep = 1
+        elif algname == 'ccg-maxsum+' or algname == 'ccg-maxsum+k':
+            ifile = dcop_instance_to_dimacs(dcop)
+            # Call the CCG construction program. Change delete to False to view output files
+            with NamedTemporaryFile(mode='w+', encoding='utf-8', delete=False) as f:
+                print(ifile.getvalue(), file=f, flush=True)
+                # print("Running " + ' '.join([CCG_EXECUTABLE_PATH, '-k', '-mm', '-ctmp.out', f.name]), file=sys.stderr)
+                if algname == 'ccg-maxsum+k':
+                    ccg_output = subprocess.check_output([CCG_EXECUTABLE_PATH, '-mm', f.name], encoding='utf-8')
+                else:
+                    ccg_output = subprocess.check_output([CCG_EXECUTABLE_PATH, '-k', '-mm', f.name], encoding='utf-8')
+
+                lines = ccg_output.splitlines()
+                print_res = False
+                i = 0
+                while not lines[i].startswith('ccg-maxsum-results-start'): i += 1
+                i+=1
+                while not lines[i].startswith('ccg-maxsum-results-end'):
+                    itr, cost, msgs, time = re.split(r'\t+', lines[i].rstrip('\t'))
+                    StatsCollector.addIterStats(algname, int(itr), int(cost), int(msgs), float(time))
+                    i += 1
+            
+            ##########################
+            ## Statistics
+            ##########################
+            if fileout is not None:
+                filename, extension = os.path.splitext(fileout)
+                StatsCollector.getDataFrameSummary().to_csv(filename + '0' + extension)
+            else:
+                StatsCollector.printSummary()
+        
+            exit()
 
         for k in range(NEXPERIMEMTS):
             seed += 1

@@ -44,7 +44,8 @@ public:
      * \return The total weight of the MWVC.
      */
     virtual double solve(const typename CCG::graph_t& g,
-                         typename std::map<typename CCG::variable_id_t, bool>& out) = 0;
+                         typename std::map<typename CCG::variable_id_t, bool>& out,
+                         WCSPInstance<> instance) = 0;
 };
 
 #endif // MWVCSOLVER_H_
