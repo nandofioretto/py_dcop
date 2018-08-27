@@ -36,8 +36,8 @@ parser.add_argument('--domsize', dest='domsize', type=int,
                     default=3,
                     help='the domain size')
 parser.add_argument('--graph', dest='graph', type=str,
-                    default='rand 0.2, 1.0',
-                    help='one of [rand p1 p2| sf | grid]')
+                    default='rand-sparse',
+                    help='one of [rand-sparse | rand-dense | sf | grid]')
 parser.add_argument('--fileout', dest='fileout', type=str,
                     help='path and file for outputs')
 args = parser.parse_args()
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     assert algname in ['dsa','maxsum','ccg-maxsum','ccg-maxsum-c','ccg-dsa', 'dsa&ccg-maxsum','dsa&ccg-maxsum-c','dsa&ccg-dsa', 'dsa&rand'], parser.print_help()
     graph_args = args.graph.split()
     graph = graph_args[0]
-    assert graph in ['rand', 'sf', 'grid'], parser.print_help()
+    assert graph in ['rand-sparse', 'rand-dense', 'sf', 'grid'], parser.print_help()
 
 
     ## Generate DCOP Instance
@@ -65,11 +65,11 @@ if __name__ == '__main__':
     dcop = DCOPInstance(seed=seed)
 
     p1, p2 = 0.5, 1.0
-    if graph == 'rand':
-        if len(graph_args) == 2:
-            p1, p2 = float(graph_args[1]), 1.0
-        elif  len(graph_args) == 3:
-            p1, p2 = float(graph_args[1]), float(graph_args[2])
+    if graph == 'rand-sparse':
+        p1 = 0.2
+        graph = g_gen.random_graph(nnodes=nagents, p1=p1)
+    elif graph == 'rand-dense':
+        p1 = 0.5
         graph = g_gen.random_graph(nnodes=nagents, p1=p1)
     elif graph == 'sf':
         graph = g_gen.scale_free(nnodes=nagents)
