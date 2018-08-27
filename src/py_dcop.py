@@ -54,7 +54,7 @@ if __name__ == '__main__':
     algname = args.algorithm
     fileout = args.fileout
 
-    assert algname in ['dsa','maxsum','ccg-maxsum','ccg-maxsum-c','ccg-dsa', 'dsa&ccg-maxsum','dsa&ccg-maxsum-c','dsa&ccg-dsa', 'dsa&rand'], parser.print_help()
+    assert algname in ['dsa','maxsum','ccg-maxsum','ccg-maxsum-c','ccg-dsa', 'dsa&ccg-maxsum','dsa&ccg-maxsum-c','dsa&ccg-dsa', 'dsa&rand', 'lp'], parser.print_help()
     graph_args = args.graph.split()
     graph = graph_args[0]
     assert graph in ['rand-sparse', 'rand-dense', 'sf', 'grid'], parser.print_help()
@@ -112,8 +112,10 @@ if __name__ == '__main__':
         alg1 = Dsa('dsa', dcop, {'max_iter': 100, 'type': 'C', 'p': 0.7}, seed=seed)
         alg2 = Rand('rand', dcop, {'max_iter': 1}, seed=seed)
         n_rep = int(iterations / 200)
-
-
+    elif algname == 'lp':
+        alg1 = LPSolver('rand', dcop, {'max_iter': 1, 'relax': True}, seed=seed)
+        n_rep = 1
+        
     for k in range(NEXPERIMEMTS):
         seed += 1
         alg1.reset(seed)

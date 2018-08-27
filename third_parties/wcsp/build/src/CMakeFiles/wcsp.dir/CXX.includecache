@@ -158,6 +158,24 @@ MWVCSolverMessagePassing.h
 KernelizerLinearProgramming.h
 /home/fioretto/Repos/py_dcop/third_parties/wcsp/src/KernelizerLinearProgramming.h
 
+/opt/gurobi702/linux64/include/gurobi_c++.h
+iostream
+-
+string
+-
+assert.h
+-
+vector
+-
+fstream
+-
+gurobi_c.h
+/opt/gurobi702/linux64/include/gurobi_c.h
+
+/opt/gurobi702/linux64/include/gurobi_c.h
+stdio.h
+-
+
 /usr/local/include/boost/algorithm/string.hpp
 boost/algorithm/string/std_containers_traits.hpp
 -

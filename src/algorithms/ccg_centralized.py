@@ -78,7 +78,7 @@ class CCGCentralized(Algorithm):
         ccg = self.ccg
         weights = nx.get_node_attributes(ccg, 'weight')
         vertex_cover = []
-        for u in ccg.nodes:
+        for u in ccg.nodes():
             sum_msgs = np.sum(self.msgs[t][u] for t in ccg.neighbors(u))
             if sum_msgs[0] > sum_msgs[1] + weights[u]:
                 vertex_cover.append(u)

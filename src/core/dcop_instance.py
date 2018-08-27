@@ -97,7 +97,7 @@ class DCOPInstance:
         :return:
         """
         # Generate Variables
-        for n in G.nodes:
+        for n in G.nodes():
             self._create_variables(n, dsize)
 
         # Generate constraints - one for each clique
@@ -116,7 +116,7 @@ class DCOPInstance:
                     # pbar.update(1)
 
         # Generate Agents
-        for n in G.nodes:
+        for n in G.nodes():
             self._create_agents(n)
 
         # Connect neighbors:

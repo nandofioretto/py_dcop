@@ -162,7 +162,7 @@ public:
             min1 += vertex_weight_map[*it];
 
             auto id = vertex_id_map[*it];
-            if (isinf(min0) || isinf(min1))
+            if (std::isinf(min0) || std::isinf(min1))
                 converged = false;
             if (min0 > min1)
             {

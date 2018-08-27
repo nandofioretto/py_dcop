@@ -8,6 +8,8 @@ src/CMakeFiles/wcsp.dir/LinearProgramSolverGurobi.cpp.o
  /home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolver.h
  /home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolverGurobi.cpp
  /home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolverGurobi.h
+ /opt/gurobi702/linux64/include/gurobi_c++.h
+ /opt/gurobi702/linux64/include/gurobi_c.h
 src/CMakeFiles/wcsp.dir/main.cpp.o
  /home/fioretto/Repos/py_dcop/third_parties/wcsp/src/ConstraintCompositeGraph.h
  /home/fioretto/Repos/py_dcop/third_parties/wcsp/src/Kernelizer.h
@@ -21,6 +23,8 @@ src/CMakeFiles/wcsp.dir/main.cpp.o
  /home/fioretto/Repos/py_dcop/third_parties/wcsp/src/WCSPInstance.h
  /home/fioretto/Repos/py_dcop/third_parties/wcsp/src/global.h
  /home/fioretto/Repos/py_dcop/third_parties/wcsp/src/main.cpp
+ /opt/gurobi702/linux64/include/gurobi_c++.h
+ /opt/gurobi702/linux64/include/gurobi_c.h
  /usr/local/include/boost/algorithm/string.hpp
  /usr/local/include/boost/algorithm/string/case_conv.hpp
  /usr/local/include/boost/algorithm/string/classification.hpp

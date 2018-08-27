@@ -15,6 +15,9 @@ class LPSolver(Algorithm):
 
         self.values = {u: 0 for u in self.ccg.nodes()}
         self.variables = dcop_instance.variables.values()
+        self.var_ccg_nodes = {vname : [(u, data['rank']) for u, data in self.ccg.nodes(data=True)
+                                                         if ('variable' in data and data['variable'] == vname)]
+                                for vname in dcop_instance.variables}
 
 
     def onStart(self, agt):
@@ -74,6 +77,6 @@ class LPSolver(Algorithm):
             return
 
         ccg = self.ccg
-        vertex_cover = [u for u in ccg.nodes if self.values[u] >= 0.5]
+        vertex_cover = [u for u in ccg.nodes() if self.values[u] >= 0.5]
         for var in self.variables:
-            set_var_value(var, vertex_cover, ccg, self.prng)
+            set_var_value(var, vertex_cover, self.var_ccg_nodes[var.name], self.prng)
