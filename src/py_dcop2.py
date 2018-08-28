@@ -88,7 +88,7 @@ if __name__ == '__main__':
         elif graph == 'grid':
             graph = g_gen.regular_grid(nnodes=int(sqrt(nagents)))
         print('graph - nodes: ', graph.number_of_nodes(), ' edges:', graph.number_of_edges())
-        dcop.generate_from_graph(G=graph, dsize=domsize, max_clique_size=3, cost_range=(0, 10), p2=p2)
+        dcop.generate_from_graph(G=graph, dsize=domsize, max_clique_size=2, cost_range=(0, 100), p2=p2)
 
         if algname is None:
             dcop.to_file(fileout)
@@ -105,7 +105,7 @@ if __name__ == '__main__':
         alg1, alg2 = None, None
         r = max(1, iterations / 50)
         if algname == 'dsa':
-            alg1 = Dsa('dsa', dcop, {'max_iter': iterations, 'type': 'C', 'p': 0.07}, seed=seed)
+            alg1 = Dsa('dsa', dcop, {'max_iter': iterations, 'type': 'C', 'p': 0.001}, seed=seed)
             n_rep = 1
         elif algname == 'maxsum':
             alg1 = MaxSum('maxsum', dcop, {'max_iter': iterations, 'damping': 0.7}, seed=seed)
@@ -122,19 +122,19 @@ if __name__ == '__main__':
         elif algname == 'dsa&ccg-maxsum':
             alg1 = Dsa('dsa', dcop, {'max_iter': r, 'type': 'C', 'p': 0.7}, seed=seed)
             alg2 = CCGMaxSum('ccg-maxsum', dcop, {'max_iter': r, 'damping': 0.7}, seed=seed)
-            n_rep = int(iterations / 2*r)
+            n_rep = int(iterations / (2*r))
         elif algname == 'dsa&ccg-maxsum-c':
             alg1 = Dsa('dsa', dcop, {'max_iter': r, 'type': 'C', 'p': 0.7}, seed=seed)
             alg2 = CCGCentralized('ccg-maxsum-c', dcop, {'max_iter': r, 'damping': 0.9}, seed=seed)
-            n_rep = int(iterations / 2*r)
+            n_rep = int(iterations / (2*r))
         elif algname == 'dsa&ccg-dsa':
             alg1 = Dsa('dsa', dcop, {'max_iter': r, 'type': 'C', 'p': 0.7}, seed=seed)
             alg2 = CCGDsa('ccg-dsa', dcop, {'max_iter': r, 'type': 'C', 'p': 0.7}, seed=seed)
-            n_rep = int(iterations / 2*r)
+            n_rep = int(iterations / (2*r))
         elif algname == 'dsa&rand':
             alg1 = Dsa('dsa', dcop, {'max_iter': r, 'type': 'C', 'p': 0.7}, seed=seed)
             alg2 = Rand('rand', dcop, {'max_iter': 1}, seed=seed)
-            n_rep = int(iterations / 2*r)
+            n_rep = int(iterations / (2*r))
         elif algname == 'lp':
             alg1 = LPSolver('rand', dcop, {'max_iter': 1, 'relax': True}, seed=seed)
             n_rep = 1
@@ -150,9 +150,11 @@ if __name__ == '__main__':
                     ccg_output = subprocess.check_output([CCG_EXECUTABLE_PATH, '-k', '-mm', f.name], encoding='utf-8')
 
                 lines = ccg_output.splitlines()
-                print_res = False
                 i = 0
-                while not lines[i].startswith('ccg-maxsum-results-start'): i += 1
+                while not lines[i].startswith('ccg-maxsum-results-start'):
+                    if 'variables resolved' in lines[i]:
+                        print(lines[i])
+                    i += 1
                 i+=1
                 while not lines[i].startswith('ccg-maxsum-results-end'):
                     itr, cost, msgs, time = re.split(r'\t+', lines[i].rstrip('\t'))
@@ -165,6 +167,7 @@ if __name__ == '__main__':
             if fileout is not None:
                 filename, extension = os.path.splitext(fileout)
                 StatsCollector.getDataFrameSummary().to_csv(filename + '0' + extension)
+                print(StatsCollector.iter_stats[-1])
             else:
                 StatsCollector.printSummary()
         
@@ -189,5 +192,6 @@ if __name__ == '__main__':
             if fileout is not None:
                 filename, extension = os.path.splitext(fileout)
                 StatsCollector.getDataFrameSummary().to_csv(filename + str(k) + extension)
+                print(StatsCollector.iter_stats[-1])
             else:
                 StatsCollector.printSummary()

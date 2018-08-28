@@ -1,4 +1,5 @@
-CCG_EXECUTABLE_PATH = '/home/fioretto/Repos/py_dcop/third_parties/wcsp/build/bin/wcsp'
+#CCG_EXECUTABLE_PATH = '/home/fioretto/Repos/py_dcop/third_parties/wcsp/build/bin/wcsp'
+CCG_EXECUTABLE_PATH= '/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/build/bin/wcsp'
 
 from io import StringIO
 from tempfile import NamedTemporaryFile

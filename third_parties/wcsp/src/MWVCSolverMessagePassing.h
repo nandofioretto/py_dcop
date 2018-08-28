@@ -148,16 +148,16 @@ public:
 
                 auto old_m = msgs0[std::make_pair(v_from, v_to)];
 
-                // Add random noise to message
-                if (num_iterations > 100) {
-                   m[0] += rand() % 20 + 1;
-                   m[1] += rand() % 20 + 1;
-                }
 
                 double alpha = num_iterations < 200 ? 0.9 : 0.7;
                 m[0] = old_m[0] * alpha + m[0] * (1-alpha);
                 m[1] = old_m[1] * alpha + m[1] * (1-alpha);
 
+                // Add random noise to message
+                //if (num_iterations > 100) {
+                   m[0] += rand() % 2 + 1;
+                   m[1] += rand() % 2 + 1;
+                //}
 
                 auto m_min = m[0] < m[1] ? m[0] : m[1];
                 m[0] -= m_min;

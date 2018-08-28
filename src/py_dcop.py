@@ -16,7 +16,7 @@ import pandas as pd
 import os
 
 DATA_PATH = '/Users/nando/Repos/DCOP/py_dcop/data/'
-NEXPERIMEMTS = 5
+NEXPERIMEMTS = 1
 
 parser = argparse.ArgumentParser( prog='py-dcop', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--algorithm', dest='algorithm', #type=str,
@@ -77,7 +77,7 @@ if __name__ == '__main__':
         graph = g_gen.regular_grid(nnodes=int(sqrt(nagents)))
 
     print('graph - nodes: ', graph.number_of_nodes(), ' edges:', graph.number_of_edges())
-    dcop.generate_from_graph(G=graph, dsize=domsize, max_clique_size=3, cost_range=(0, 10), p2=p2)
+    dcop.generate_from_graph(G=graph, dsize=domsize, max_clique_size=3, cost_range=(0, 100), p2=p2)
     print('gen dcop')
     ## Run algorithms
     alg1, alg2 = None, None

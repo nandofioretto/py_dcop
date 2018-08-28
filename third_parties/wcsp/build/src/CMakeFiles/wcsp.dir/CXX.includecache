@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -6,7 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/ConstraintCompositeGraph.h
+/Library/gurobi752/mac64/include/gurobi_c++.h
+iostream
+-
+vector
+-
+string
+-
+gurobi_c.h
+/Library/gurobi752/mac64/include/gurobi_c.h
+
+/Library/gurobi752/mac64/include/gurobi_c.h
+stdio.h
+-
+
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/ConstraintCompositeGraph.h
 array
 -
 map
@@ -20,23 +34,23 @@ boost/graph/adjacency_list.hpp
 boost/graph/graphviz.hpp
 -
 WCSPInstance.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/WCSPInstance.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/WCSPInstance.h
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/Kernelizer.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/Kernelizer.h
 ConstraintCompositeGraph.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/ConstraintCompositeGraph.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/ConstraintCompositeGraph.h
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/KernelizerLinearProgramming.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/KernelizerLinearProgramming.h
 memory
 -
 Kernelizer.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/Kernelizer.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/Kernelizer.h
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolver.cpp
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/LinearProgramSolver.cpp
 LinearProgramSolver.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolver.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/LinearProgramSolver.h
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolver.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/LinearProgramSolver.h
 exception
 -
 sstream
@@ -46,13 +60,13 @@ string
 vector
 -
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolverGurobi.cpp
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/LinearProgramSolverGurobi.cpp
 LinearProgramSolverGurobi.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolverGurobi.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/LinearProgramSolverGurobi.h
 iostream
 -
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolverGurobi.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/LinearProgramSolverGurobi.h
 memory
 -
 vector
@@ -60,21 +74,21 @@ vector
 gurobi_c++.h
 -
 LinearProgramSolver.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolver.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/LinearProgramSolver.h
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/MWVCSolver.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/MWVCSolver.h
 ConstraintCompositeGraph.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/ConstraintCompositeGraph.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/ConstraintCompositeGraph.h
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/MWVCSolverLinearProgramming.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/MWVCSolverLinearProgramming.h
 MWVCSolver.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/MWVCSolver.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/MWVCSolver.h
 LinearProgramSolver.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolver.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/LinearProgramSolver.h
 RunningTime.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/RunningTime.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/RunningTime.h
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/MWVCSolverMessagePassing.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/MWVCSolverMessagePassing.h
 array
 -
 cmath
@@ -90,19 +104,19 @@ chrono
 boost/any.hpp
 -
 ConstraintCompositeGraph.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/ConstraintCompositeGraph.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/ConstraintCompositeGraph.h
 MWVCSolver.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/MWVCSolver.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/MWVCSolver.h
 WCSPInstance.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/WCSPInstance.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/WCSPInstance.h
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/RunningTime.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/RunningTime.h
 chrono
 -
 memory
 -
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/WCSPInstance.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/WCSPInstance.h
 array
 -
 cstdint
@@ -130,15 +144,15 @@ boost/property_tree/ptree.hpp
 cblas.h
 -
 global.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/global.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/global.h
 RunningTime.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/RunningTime.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/RunningTime.h
 LinearProgramSolver.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolver.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/LinearProgramSolver.h
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/global.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/global.h
 
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/main.cpp
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/main.cpp
 iostream
 -
 boost/algorithm/string.hpp
@@ -146,38 +160,32 @@ boost/algorithm/string.hpp
 boost/program_options.hpp
 -
 global.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/global.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/global.h
 RunningTime.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/RunningTime.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/RunningTime.h
 WCSPInstance.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/WCSPInstance.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/WCSPInstance.h
 ConstraintCompositeGraph.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/ConstraintCompositeGraph.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/ConstraintCompositeGraph.h
 LinearProgramSolverGurobi.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolverGurobi.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/LinearProgramSolverGurobi.h
 MWVCSolverLinearProgramming.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/MWVCSolverLinearProgramming.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/MWVCSolverLinearProgramming.h
 MWVCSolverMessagePassing.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/MWVCSolverMessagePassing.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/MWVCSolverMessagePassing.h
 KernelizerLinearProgramming.h
-/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/KernelizerLinearProgramming.h
+/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/KernelizerLinearProgramming.h
 
-/opt/gurobi702/linux64/include/gurobi_c++.h
-iostream
+/usr/local/Cellar/openblas/0.3.2/include/cblas.h
+stddef.h
 -
-string
--
-assert.h
--
-vector
--
-fstream
--
-gurobi_c.h
-/opt/gurobi702/linux64/include/gurobi_c.h
+openblas_config.h
+/usr/local/Cellar/openblas/0.3.2/include/openblas_config.h
 
-/opt/gurobi702/linux64/include/gurobi_c.h
+/usr/local/Cellar/openblas/0.3.2/include/openblas_config.h
 stdio.h
+-
+complex.h
 -
 
 /usr/local/include/boost/algorithm/string.hpp
@@ -1007,6 +1015,8 @@ boost/archive/detail/archive_serializer_map.hpp
 -
 boost/archive/detail/check.hpp
 -
+boost/core/addressof.hpp
+-
 
 /usr/local/include/boost/archive/detail/register_archive.hpp
 
@@ -1055,6 +1065,8 @@ boost/atomic/detail/atomic_template.hpp
 -
 boost/atomic/detail/operations.hpp
 -
+boost/atomic/detail/extra_operations.hpp
+-
 
 /usr/local/include/boost/atomic/atomic_flag.hpp
 boost/atomic/capabilities.hpp
@@ -1089,15 +1101,21 @@ boost/cstdint.hpp
 -
 boost/assert.hpp
 -
-boost/type_traits/is_signed.hpp
--
-boost/type_traits/is_integral.hpp
--
 boost/atomic/detail/config.hpp
 -
 boost/atomic/detail/bitwise_cast.hpp
 -
 boost/atomic/detail/operations_fwd.hpp
+-
+boost/atomic/detail/extra_operations_fwd.hpp
+-
+boost/atomic/detail/type_traits/is_signed.hpp
+-
+boost/atomic/detail/type_traits/is_integral.hpp
+-
+boost/atomic/detail/type_traits/is_function.hpp
+-
+boost/atomic/detail/type_traits/conditional.hpp
 -
 
 /usr/local/include/boost/atomic/detail/bitwise_cast.hpp
@@ -1108,6 +1126,30 @@ cstring
 
 /usr/local/include/boost/atomic/detail/config.hpp
 boost/config.hpp
+-
+
+/usr/local/include/boost/atomic/detail/extra_operations.hpp
+boost/atomic/detail/extra_ops_generic.hpp
+-
+
+/usr/local/include/boost/atomic/detail/extra_operations_fwd.hpp
+cstddef
+-
+boost/atomic/detail/config.hpp
+-
+
+/usr/local/include/boost/atomic/detail/extra_ops_generic.hpp
+cstddef
+-
+boost/memory_order.hpp
+-
+boost/atomic/detail/config.hpp
+-
+boost/atomic/detail/storage_type.hpp
+-
+boost/atomic/detail/extra_operations_fwd.hpp
+-
+boost/atomic/capabilities.hpp
 -
 
 /usr/local/include/boost/atomic/detail/int_sizes.hpp
@@ -1184,6 +1226,38 @@ boost/atomic/detail/config.hpp
 cstring
 -
 
+/usr/local/include/boost/atomic/detail/type_traits/conditional.hpp
+boost/atomic/detail/config.hpp
+-
+type_traits
+-
+boost/type_traits/conditional.hpp
+-
+
+/usr/local/include/boost/atomic/detail/type_traits/is_function.hpp
+boost/atomic/detail/config.hpp
+-
+type_traits
+-
+boost/type_traits/is_function.hpp
+-
+
+/usr/local/include/boost/atomic/detail/type_traits/is_integral.hpp
+boost/atomic/detail/config.hpp
+-
+type_traits
+-
+boost/type_traits/is_integral.hpp
+-
+
+/usr/local/include/boost/atomic/detail/type_traits/is_signed.hpp
+boost/atomic/detail/config.hpp
+-
+type_traits
+-
+boost/type_traits/is_signed.hpp
+-
+
 /usr/local/include/boost/atomic/fences.hpp
 boost/memory_order.hpp
 -
@@ -1241,9 +1315,13 @@ boost/bind/bind_cc.hpp
 -
 boost/bind/bind_cc.hpp
 -
+boost/bind/bind_cc.hpp
+-
 boost/bind/bind_mf_cc.hpp
 -
 boost/bind/bind_mf2_cc.hpp
+-
+boost/bind/bind_mf_cc.hpp
 -
 boost/bind/bind_mf_cc.hpp
 -
@@ -1435,8 +1513,6 @@ boost/mpl/bool.hpp
 -
 
 /usr/local/include/boost/chrono/detail/system.hpp
-boost/version.hpp
--
 boost/system/error_code.hpp
 -
 
@@ -1500,8 +1576,6 @@ boost/chrono/detail/inlined/chrono.hpp
 
 /usr/local/include/boost/chrono/time_point.hpp
 boost/chrono/duration.hpp
--
-iostream
 -
 boost/config/abi_prefix.hpp
 -
@@ -1625,13 +1699,13 @@ boost/concept/detail/concept_undef.hpp
 /usr/local/include/boost/config.hpp
 boost/config/user.hpp
 -
-boost/config/select_compiler_config.hpp
+boost/config/detail/select_compiler_config.hpp
 -
-boost/config/select_stdlib_config.hpp
+boost/config/detail/select_stdlib_config.hpp
 -
-boost/config/select_platform_config.hpp
+boost/config/detail/select_platform_config.hpp
 -
-boost/config/suffix.hpp
+boost/config/detail/suffix.hpp
 -
 
 /usr/local/include/boost/config/abi_prefix.hpp
@@ -1725,8 +1799,12 @@ boost/config/compiler/common_edg.hpp
 /usr/local/include/boost/config/compiler/nvcc.hpp
 
 /usr/local/include/boost/config/compiler/pathscale.hpp
+boost/config/compiler/clang.hpp
+/usr/local/include/boost/config/compiler/boost/config/compiler/clang.hpp
 
 /usr/local/include/boost/config/compiler/pgi.hpp
+boost/config/compiler/gcc.hpp
+-
 
 /usr/local/include/boost/config/compiler/sgi_mipspro.hpp
 boost/config/compiler/common_edg.hpp
@@ -1738,127 +1816,19 @@ boost/config/compiler/common_edg.hpp
 
 /usr/local/include/boost/config/compiler/visualc.hpp
 
-/usr/local/include/boost/config/no_tr1/cmath.hpp
-cmath
+/usr/local/include/boost/config/compiler/xlcpp.hpp
+
+/usr/local/include/boost/config/compiler/xlcpp_zos.hpp
+features.h
 -
 
-/usr/local/include/boost/config/no_tr1/complex.hpp
-complex
--
-
-/usr/local/include/boost/config/no_tr1/functional.hpp
-functional
--
-
-/usr/local/include/boost/config/no_tr1/memory.hpp
-memory
--
-
-/usr/local/include/boost/config/no_tr1/utility.hpp
-utility
--
-
-/usr/local/include/boost/config/platform/aix.hpp
-boost/config/posix_features.hpp
--
-
-/usr/local/include/boost/config/platform/amigaos.hpp
-
-/usr/local/include/boost/config/platform/beos.hpp
-boost/config/posix_features.hpp
--
-
-/usr/local/include/boost/config/platform/bsd.hpp
-boost/config/posix_features.hpp
--
-
-/usr/local/include/boost/config/platform/cray.hpp
-boost/config/posix_features.hpp
--
-
-/usr/local/include/boost/config/platform/cygwin.hpp
-unistd.h
--
-sys/types.h
--
-boost/config/posix_features.hpp
--
-
-/usr/local/include/boost/config/platform/hpux.hpp
-boost/config/posix_features.hpp
--
-
-/usr/local/include/boost/config/platform/irix.hpp
-boost/config/posix_features.hpp
--
-
-/usr/local/include/boost/config/platform/linux.hpp
-cstdlib
--
-stdlib.h
--
-boost/config/posix_features.hpp
--
-
-/usr/local/include/boost/config/platform/macos.hpp
-boost/config/posix_features.hpp
--
-
-/usr/local/include/boost/config/platform/qnxnto.hpp
-boost/config/posix_features.hpp
--
-
-/usr/local/include/boost/config/platform/solaris.hpp
-boost/config/posix_features.hpp
--
-
-/usr/local/include/boost/config/platform/symbian.hpp
-cstdlib
--
-stdlib.h
--
-boost/config/posix_features.hpp
--
-sys/endian.h
--
-
-/usr/local/include/boost/config/platform/vms.hpp
-
-/usr/local/include/boost/config/platform/vxworks.hpp
-version.h
--
-time.h
--
-sysLib.h
--
-cstdint
--
-ioLib.h
--
-tickLib.h
--
-sys/time.h
--
-signal.h
--
-boost/config/posix_features.hpp
--
-
-/usr/local/include/boost/config/platform/win32.hpp
-_mingw.h
--
-
-/usr/local/include/boost/config/posix_features.hpp
+/usr/local/include/boost/config/detail/posix_features.hpp
 unistd.h
 -
 
-/usr/local/include/boost/config/requires_threads.hpp
-boost/config.hpp
--
-
-/usr/local/include/boost/config/select_compiler_config.hpp
+/usr/local/include/boost/config/detail/select_compiler_config.hpp
 boost/config/compiler/nvcc.hpp
-/usr/local/include/boost/config/boost/config/compiler/nvcc.hpp
+/usr/local/include/boost/config/detail/boost/config/compiler/nvcc.hpp
 boost/config/compiler/gcc_xml.hpp
 -
 boost/config/compiler/cray.hpp
@@ -1895,6 +1865,10 @@ boost/config/compiler/hp_acc.hpp
 -
 boost/config/compiler/mpw.hpp
 -
+boost/config/compiler/xlcpp_zos.hpp
+-
+boost/config/compiler/xlcpp.hpp
+-
 boost/config/compiler/vacpp.hpp
 -
 boost/config/compiler/pgi.hpp
@@ -1902,45 +1876,47 @@ boost/config/compiler/pgi.hpp
 boost/config/compiler/visualc.hpp
 -
 
-/usr/local/include/boost/config/select_platform_config.hpp
-boost/config/posix_features.hpp
+/usr/local/include/boost/config/detail/select_platform_config.hpp
+boost/config/detail/posix_features.hpp
 -
 boost/config/platform/linux.hpp
-/usr/local/include/boost/config/boost/config/platform/linux.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/linux.hpp
 boost/config/platform/bsd.hpp
-/usr/local/include/boost/config/boost/config/platform/bsd.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/bsd.hpp
 boost/config/platform/solaris.hpp
-/usr/local/include/boost/config/boost/config/platform/solaris.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/solaris.hpp
 boost/config/platform/irix.hpp
-/usr/local/include/boost/config/boost/config/platform/irix.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/irix.hpp
 boost/config/platform/hpux.hpp
-/usr/local/include/boost/config/boost/config/platform/hpux.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/hpux.hpp
 boost/config/platform/cygwin.hpp
-/usr/local/include/boost/config/boost/config/platform/cygwin.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/cygwin.hpp
 boost/config/platform/win32.hpp
-/usr/local/include/boost/config/boost/config/platform/win32.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/win32.hpp
 boost/config/platform/beos.hpp
-/usr/local/include/boost/config/boost/config/platform/beos.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/beos.hpp
 boost/config/platform/macos.hpp
-/usr/local/include/boost/config/boost/config/platform/macos.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/macos.hpp
+boost/config/platform/zos.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/zos.hpp
 boost/config/platform/aix.hpp
-/usr/local/include/boost/config/boost/config/platform/aix.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/aix.hpp
 boost/config/platform/amigaos.hpp
-/usr/local/include/boost/config/boost/config/platform/amigaos.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/amigaos.hpp
 boost/config/platform/qnxnto.hpp
-/usr/local/include/boost/config/boost/config/platform/qnxnto.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/qnxnto.hpp
 boost/config/platform/vxworks.hpp
-/usr/local/include/boost/config/boost/config/platform/vxworks.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/vxworks.hpp
 boost/config/platform/symbian.hpp
-/usr/local/include/boost/config/boost/config/platform/symbian.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/symbian.hpp
 boost/config/platform/cray.hpp
-/usr/local/include/boost/config/boost/config/platform/cray.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/cray.hpp
 boost/config/platform/vms.hpp
-/usr/local/include/boost/config/boost/config/platform/vms.hpp
-boost/config/posix_features.hpp
+/usr/local/include/boost/config/detail/boost/config/platform/vms.hpp
+boost/config/detail/posix_features.hpp
 -
 
-/usr/local/include/boost/config/select_stdlib_config.hpp
+/usr/local/include/boost/config/detail/select_stdlib_config.hpp
 cstddef
 -
 stddef.h
@@ -1948,25 +1924,153 @@ stddef.h
 utility
 -
 boost/config/stdlib/stlport.hpp
-/usr/local/include/boost/config/boost/config/stdlib/stlport.hpp
+/usr/local/include/boost/config/detail/boost/config/stdlib/stlport.hpp
 boost/config/stdlib/libcomo.hpp
-/usr/local/include/boost/config/boost/config/stdlib/libcomo.hpp
+/usr/local/include/boost/config/detail/boost/config/stdlib/libcomo.hpp
 boost/config/stdlib/roguewave.hpp
-/usr/local/include/boost/config/boost/config/stdlib/roguewave.hpp
+/usr/local/include/boost/config/detail/boost/config/stdlib/roguewave.hpp
 boost/config/stdlib/libcpp.hpp
-/usr/local/include/boost/config/boost/config/stdlib/libcpp.hpp
+/usr/local/include/boost/config/detail/boost/config/stdlib/libcpp.hpp
 boost/config/stdlib/libstdcpp3.hpp
-/usr/local/include/boost/config/boost/config/stdlib/libstdcpp3.hpp
+/usr/local/include/boost/config/detail/boost/config/stdlib/libstdcpp3.hpp
 boost/config/stdlib/sgi.hpp
-/usr/local/include/boost/config/boost/config/stdlib/sgi.hpp
+/usr/local/include/boost/config/detail/boost/config/stdlib/sgi.hpp
 boost/config/stdlib/msl.hpp
-/usr/local/include/boost/config/boost/config/stdlib/msl.hpp
+/usr/local/include/boost/config/detail/boost/config/stdlib/msl.hpp
+boost/config/stdlib/xlcpp_zos.hpp
+/usr/local/include/boost/config/detail/boost/config/stdlib/xlcpp_zos.hpp
 boost/config/stdlib/vacpp.hpp
-/usr/local/include/boost/config/boost/config/stdlib/vacpp.hpp
+/usr/local/include/boost/config/detail/boost/config/stdlib/vacpp.hpp
 boost/config/stdlib/modena.hpp
-/usr/local/include/boost/config/boost/config/stdlib/modena.hpp
+/usr/local/include/boost/config/detail/boost/config/stdlib/modena.hpp
 boost/config/stdlib/dinkumware.hpp
-/usr/local/include/boost/config/boost/config/stdlib/dinkumware.hpp
+/usr/local/include/boost/config/detail/boost/config/stdlib/dinkumware.hpp
+
+/usr/local/include/boost/config/detail/suffix.hpp
+limits.h
+-
+cstddef
+-
+typeinfo
+-
+
+/usr/local/include/boost/config/no_tr1/cmath.hpp
+cmath
+-
+
+/usr/local/include/boost/config/no_tr1/complex.hpp
+complex
+-
+
+/usr/local/include/boost/config/no_tr1/functional.hpp
+functional
+-
+
+/usr/local/include/boost/config/no_tr1/memory.hpp
+memory
+-
+
+/usr/local/include/boost/config/no_tr1/utility.hpp
+utility
+-
+
+/usr/local/include/boost/config/platform/aix.hpp
+boost/config/detail/posix_features.hpp
+-
+
+/usr/local/include/boost/config/platform/amigaos.hpp
+
+/usr/local/include/boost/config/platform/beos.hpp
+boost/config/detail/posix_features.hpp
+-
+
+/usr/local/include/boost/config/platform/bsd.hpp
+boost/config/detail/posix_features.hpp
+-
+
+/usr/local/include/boost/config/platform/cray.hpp
+boost/config/detail/posix_features.hpp
+-
+
+/usr/local/include/boost/config/platform/cygwin.hpp
+unistd.h
+-
+sys/types.h
+-
+boost/config/detail/posix_features.hpp
+-
+
+/usr/local/include/boost/config/platform/hpux.hpp
+boost/config/detail/posix_features.hpp
+-
+
+/usr/local/include/boost/config/platform/irix.hpp
+boost/config/detail/posix_features.hpp
+-
+
+/usr/local/include/boost/config/platform/linux.hpp
+cstdlib
+-
+stdlib.h
+-
+boost/config/detail/posix_features.hpp
+-
+
+/usr/local/include/boost/config/platform/macos.hpp
+boost/config/detail/posix_features.hpp
+-
+
+/usr/local/include/boost/config/platform/qnxnto.hpp
+boost/config/detail/posix_features.hpp
+-
+
+/usr/local/include/boost/config/platform/solaris.hpp
+boost/config/detail/posix_features.hpp
+-
+
+/usr/local/include/boost/config/platform/symbian.hpp
+cstdlib
+-
+stdlib.h
+-
+boost/config/detail/posix_features.hpp
+-
+sys/endian.h
+-
+
+/usr/local/include/boost/config/platform/vms.hpp
+
+/usr/local/include/boost/config/platform/vxworks.hpp
+version.h
+-
+time.h
+-
+sysLib.h
+-
+cstdint
+-
+ioLib.h
+-
+tickLib.h
+-
+sys/time.h
+-
+signal.h
+-
+boost/config/detail/posix_features.hpp
+-
+
+/usr/local/include/boost/config/platform/win32.hpp
+_mingw.h
+-
+
+/usr/local/include/boost/config/platform/zos.hpp
+features.h
+-
+
+/usr/local/include/boost/config/requires_threads.hpp
+boost/config.hpp
+-
 
 /usr/local/include/boost/config/stdlib/dinkumware.hpp
 boost/config/no_tr1/utility.hpp
@@ -1997,7 +2101,7 @@ boost/config/no_tr1/utility.hpp
 -
 cstddef
 -
-boost/config/posix_features.hpp
+boost/config/detail/posix_features.hpp
 -
 
 /usr/local/include/boost/config/stdlib/roguewave.hpp
@@ -2028,17 +2132,15 @@ algorithm
 unistd.h
 -
 
-/usr/local/include/boost/config/suffix.hpp
-limits.h
--
-cstddef
--
-typeinfo
--
+/usr/local/include/boost/config/stdlib/xlcpp_zos.hpp
 
 /usr/local/include/boost/config/user.hpp
 
 /usr/local/include/boost/config/warning_disable.hpp
+
+/usr/local/include/boost/config/workaround.hpp
+boost/config.hpp
+-
 
 /usr/local/include/boost/container/allocator_traits.hpp
 boost/config.hpp
@@ -2131,7 +2233,7 @@ boost/config.hpp
 /usr/local/include/boost/core/addressof.hpp
 boost/config.hpp
 -
-boost/detail/workaround.hpp
+boost/config/workaround.hpp
 -
 cstddef
 -
@@ -2169,7 +2271,7 @@ boost/config.hpp
 /usr/local/include/boost/core/no_exceptions_support.hpp
 boost/config.hpp
 -
-boost/detail/workaround.hpp
+boost/config/workaround.hpp
 -
 
 /usr/local/include/boost/core/noncopyable.hpp
@@ -2179,9 +2281,9 @@ boost/config.hpp
 /usr/local/include/boost/core/ref.hpp
 boost/config.hpp
 -
-boost/utility/addressof.hpp
+boost/config/workaround.hpp
 -
-boost/detail/workaround.hpp
+boost/core/addressof.hpp
 -
 
 /usr/local/include/boost/core/swap.hpp
@@ -2342,8 +2444,6 @@ stdexcept
 
 /usr/local/include/boost/date_time/filetime_functions.hpp
 boost/date_time/compiler_config.hpp
--
-windows.h
 -
 boost/cstdint.hpp
 -
@@ -2559,7 +2659,7 @@ boost/date_time/c_time.hpp
 -
 boost/date_time/time_clock.hpp
 -
-boost/date_time/filetime_functions.hpp
+boost/winapi/time.hpp
 -
 
 /usr/local/include/boost/date_time/period.hpp
@@ -2570,6 +2670,8 @@ boost/date_time/compiler_config.hpp
 
 /usr/local/include/boost/date_time/posix_time/conversion.hpp
 cstring
+-
+boost/cstdint.hpp
 -
 boost/date_time/posix_time/ptime.hpp
 -
@@ -2699,6 +2801,8 @@ boost/date_time/compiler_config.hpp
 /usr/local/include/boost/date_time/time_iterator.hpp
 
 /usr/local/include/boost/date_time/time_resolution_traits.hpp
+ctime
+-
 boost/cstdint.hpp
 -
 boost/date_time/time_defs.hpp
@@ -2935,17 +3039,21 @@ boost/core/no_exceptions_support.hpp
 -
 
 /usr/local/include/boost/detail/numeric_traits.hpp
+cstddef
+-
 boost/config.hpp
+-
+boost/limits.hpp
 -
 boost/cstdint.hpp
 -
+boost/type_traits/is_signed.hpp
+-
+boost/type_traits/conditional.hpp
+-
 boost/static_assert.hpp
 -
-boost/type_traits.hpp
--
-boost/detail/select_type.hpp
--
-boost/limits.hpp
+boost/type_traits/is_integral.hpp
 -
 
 /usr/local/include/boost/detail/reference_content.hpp
@@ -2964,42 +3072,112 @@ boost/mpl/void.hpp
 boost/core/typeinfo.hpp
 -
 
-/usr/local/include/boost/detail/winapi/basic_types.hpp
-cstdarg
+/usr/local/include/boost/detail/winapi/access_rights.hpp
+boost/winapi/access_rights.hpp
 -
-boost/cstdint.hpp
--
-boost/detail/winapi/config.hpp
--
-windows.h
--
-winerror.h
--
-kfuncs.h
+boost/detail/winapi/detail/deprecated_namespace.hpp
 -
 
 /usr/local/include/boost/detail/winapi/config.hpp
-_mingw.h
+boost/winapi/config.hpp
 -
+
+/usr/local/include/boost/detail/winapi/detail/deprecated_namespace.hpp
 boost/config.hpp
+-
+
+/usr/local/include/boost/detail/winapi/dll.hpp
+boost/winapi/dll.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
+-
+
+/usr/local/include/boost/detail/winapi/event.hpp
+boost/winapi/event.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
+-
+
+/usr/local/include/boost/detail/winapi/get_current_process.hpp
+boost/winapi/get_current_process.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
+-
+
+/usr/local/include/boost/detail/winapi/get_current_process_id.hpp
+boost/winapi/get_current_process_id.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
+-
+
+/usr/local/include/boost/detail/winapi/get_current_thread.hpp
+boost/winapi/get_current_thread.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
+-
+
+/usr/local/include/boost/detail/winapi/get_current_thread_id.hpp
+boost/winapi/get_current_thread_id.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
 -
 
 /usr/local/include/boost/detail/winapi/get_last_error.hpp
-boost/detail/winapi/basic_types.hpp
+boost/winapi/get_last_error.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
+-
+
+/usr/local/include/boost/detail/winapi/handles.hpp
+boost/winapi/handles.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
+-
+
+/usr/local/include/boost/detail/winapi/heap_memory.hpp
+boost/winapi/heap_memory.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
+-
+
+/usr/local/include/boost/detail/winapi/semaphore.hpp
+boost/winapi/semaphore.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
+-
+
+/usr/local/include/boost/detail/winapi/system.hpp
+boost/winapi/system.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
+-
+
+/usr/local/include/boost/detail/winapi/thread.hpp
+boost/winapi/thread.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
 -
 
 /usr/local/include/boost/detail/winapi/time.hpp
-boost/detail/winapi/basic_types.hpp
+boost/winapi/time.hpp
 -
-boost/predef/platform.h
+boost/detail/winapi/detail/deprecated_namespace.hpp
 -
 
 /usr/local/include/boost/detail/winapi/timers.hpp
-boost/detail/winapi/basic_types.hpp
+boost/winapi/timers.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
+-
+
+/usr/local/include/boost/detail/winapi/wait.hpp
+boost/winapi/wait.hpp
+-
+boost/detail/winapi/detail/deprecated_namespace.hpp
 -
 
 /usr/local/include/boost/detail/workaround.hpp
-boost/config.hpp
+boost/config/workaround.hpp
 -
 
 /usr/local/include/boost/dynamic_bitset.hpp
@@ -3069,6 +3247,8 @@ boost/smart_ptr/enable_shared_from_this.hpp
 /usr/local/include/boost/exception/detail/error_info_impl.hpp
 boost/config.hpp
 -
+boost/type_traits/is_nothrow_move_constructible.hpp
+-
 utility
 -
 string
@@ -3099,13 +3279,13 @@ boost/shared_ptr.hpp
 -
 
 /usr/local/include/boost/exception/detail/type_info.hpp
+boost/config.hpp
+-
 boost/core/typeinfo.hpp
 -
 boost/core/demangle.hpp
 -
 boost/current_function.hpp
--
-boost/config.hpp
 -
 string
 -
@@ -3115,6 +3295,8 @@ memory
 -
 
 /usr/local/include/boost/exception/info.hpp
+boost/config.hpp
+-
 boost/exception/exception.hpp
 -
 boost/exception/to_string_stub.hpp
@@ -3122,8 +3304,6 @@ boost/exception/to_string_stub.hpp
 boost/exception/detail/error_info_impl.hpp
 -
 boost/exception/detail/shared_ptr.hpp
--
-boost/config.hpp
 -
 map
 -
@@ -3249,6 +3429,8 @@ boost/utility/base_from_member.hpp
 -
 boost/shared_ptr.hpp
 -
+boost/config.hpp
+-
 boost/assert.hpp
 -
 boost/format/alt_sstream_impl.hpp
@@ -3361,6 +3543,8 @@ string
 -
 boost/assert.hpp
 -
+boost/core/ignore_unused.hpp
+-
 boost/optional.hpp
 -
 boost/limits.hpp
@@ -3386,6 +3570,8 @@ boost/throw_exception.hpp
 boost/assert.hpp
 -
 boost/config.hpp
+-
+boost/core/ignore_unused.hpp
 -
 
 /usr/local/include/boost/function.hpp
@@ -5157,6 +5343,8 @@ boost/type_traits/add_const.hpp
 -
 boost/type_traits/is_base_of.hpp
 -
+boost/type_traits/remove_cv_ref.hpp
+-
 boost/detail/workaround.hpp
 -
 boost/core/enable_if.hpp
@@ -5614,8 +5802,6 @@ boost/fusion/container/vector/detail/cpp03/value_at_impl.hpp
 boost/fusion/container/vector/vector_fwd.hpp
 -
 boost/type_traits/declval.hpp
--
-boost/type_traits/remove_cv.hpp
 -
 
 /usr/local/include/boost/fusion/container/vector/detail/value_of_impl.hpp
@@ -8817,7 +9003,9 @@ boost/static_assert.hpp
 -
 
 /usr/local/include/boost/integer/common_factor_rt.hpp
-boost/integer_fwd.hpp
+boost/assert.hpp
+-
+boost/core/enable_if.hpp
 -
 boost/config.hpp
 -
@@ -8826,6 +9014,18 @@ boost/limits.hpp
 climits
 -
 boost/detail/workaround.hpp
+-
+iterator
+-
+algorithm
+-
+limits
+-
+type_traits
+-
+functional
+-
+intrin.h
 -
 
 /usr/local/include/boost/integer/integer_log2.hpp
@@ -8892,12 +9092,6 @@ cstddef
 boost/intrusive/detail/config_end.hpp
 -
 
-/usr/local/include/boost/intrusive/detail/pointer_element.hpp
-boost/config.hpp
--
-boost/intrusive/detail/workaround.hpp
--
-
 /usr/local/include/boost/intrusive/detail/workaround.hpp
 boost/config.hpp
 -
@@ -8917,7 +9111,7 @@ boost/intrusive/detail/workaround.hpp
 -
 boost/intrusive/pointer_rebind.hpp
 -
-boost/intrusive/detail/pointer_element.hpp
+boost/move/detail/pointer_element.hpp
 -
 boost/intrusive/detail/mpl.hpp
 -
@@ -8936,6 +9130,12 @@ boost/smart_ptr/intrusive_ptr.hpp
 iterator
 -
 cstddef
+-
+
+/usr/local/include/boost/iterator/advance.hpp
+boost/config.hpp
+-
+boost/iterator/iterator_categories.hpp
 -
 
 /usr/local/include/boost/iterator/counting_iterator.hpp
@@ -9005,8 +9205,6 @@ boost/iterator/detail/config_undef.hpp
 -
 
 /usr/local/include/boost/iterator/filter_iterator.hpp
-boost/iterator.hpp
--
 boost/iterator/iterator_adaptor.hpp
 -
 boost/iterator/iterator_categories.hpp
@@ -9017,15 +9215,11 @@ boost/static_assert.hpp
 -
 
 /usr/local/include/boost/iterator/indirect_iterator.hpp
-boost/iterator.hpp
--
 boost/iterator/iterator_adaptor.hpp
 -
 boost/pointee.hpp
 -
 boost/indirect_reference.hpp
--
-boost/detail/iterator.hpp
 -
 boost/detail/indirect_traits.hpp
 -
@@ -9042,6 +9236,8 @@ boost/mpl/eval_if.hpp
 boost/mpl/not.hpp
 -
 boost/mpl/has_xxx.hpp
+-
+iterator
 -
 boost/shared_ptr.hpp
 -
@@ -9070,10 +9266,6 @@ boost/iterator/detail/config_undef.hpp
 
 /usr/local/include/boost/iterator/iterator_adaptor.hpp
 boost/static_assert.hpp
--
-boost/iterator.hpp
--
-boost/detail/iterator.hpp
 -
 boost/iterator/iterator_categories.hpp
 -
@@ -9105,8 +9297,6 @@ boost/iterator/detail/config_undef.hpp
 /usr/local/include/boost/iterator/iterator_categories.hpp
 boost/config.hpp
 -
-boost/detail/iterator.hpp
--
 boost/iterator/detail/config_def.hpp
 -
 boost/detail/workaround.hpp
@@ -9123,6 +9313,8 @@ boost/type_traits/is_convertible.hpp
 -
 boost/static_assert.hpp
 -
+iterator
+-
 boost/iterator/detail/config_undef.hpp
 -
 
@@ -9130,8 +9322,6 @@ boost/iterator/detail/config_undef.hpp
 boost/concept_check.hpp
 -
 boost/iterator/iterator_categories.hpp
--
-boost/detail/iterator.hpp
 -
 boost/type_traits/is_same.hpp
 -
@@ -9153,6 +9343,8 @@ boost/config.hpp
 -
 algorithm
 -
+iterator
+-
 boost/concept/detail/concept_def.hpp
 -
 boost/concept/detail/concept_undef.hpp
@@ -9160,8 +9352,6 @@ boost/concept/detail/concept_undef.hpp
 
 /usr/local/include/boost/iterator/iterator_facade.hpp
 boost/config.hpp
--
-boost/iterator.hpp
 -
 boost/iterator/interoperable.hpp
 -
@@ -9209,15 +9399,17 @@ boost/mpl/apply.hpp
 -
 boost/mpl/identity.hpp
 -
+cstddef
+-
 boost/iterator/detail/config_def.hpp
 -
 boost/iterator/detail/config_undef.hpp
 -
 
 /usr/local/include/boost/iterator/iterator_traits.hpp
-boost/detail/iterator.hpp
--
 boost/detail/workaround.hpp
+-
+iterator
 -
 
 /usr/local/include/boost/iterator/minimum_category.hpp
@@ -9233,16 +9425,10 @@ boost/mpl/aux_/lambda_support.hpp
 -
 
 /usr/local/include/boost/iterator/reverse_iterator.hpp
-boost/next_prior.hpp
--
-boost/iterator.hpp
--
 boost/iterator/iterator_adaptor.hpp
 -
 
 /usr/local/include/boost/iterator/transform_iterator.hpp
-boost/iterator.hpp
--
 boost/iterator/detail/enable_if.hpp
 -
 boost/iterator/iterator_adaptor.hpp
@@ -9269,6 +9455,8 @@ boost/type_traits/remove_reference.hpp
 -
 boost/utility/result_of.hpp
 -
+iterator
+-
 boost/type_traits/is_base_and_derived.hpp
 -
 boost/iterator/detail/config_def.hpp
@@ -9278,8 +9466,6 @@ boost/iterator/detail/config_undef.hpp
 
 /usr/local/include/boost/iterator/zip_iterator.hpp
 stddef.h
--
-boost/iterator.hpp
 -
 boost/iterator/iterator_traits.hpp
 -
@@ -9655,6 +9841,8 @@ quadmath.h
 /usr/local/include/boost/math/special_functions/quadmath.h
 
 /usr/local/include/boost/math/special_functions/math_fwd.hpp
+vector
+-
 boost/math/special_functions/detail/round_fwd.hpp
 -
 boost/math/tools/promotion.hpp
@@ -9756,6 +9944,30 @@ boost/bind/mem_fn.hpp
 
 /usr/local/include/boost/memory_order.hpp
 
+/usr/local/include/boost/move/adl_move_swap.hpp
+boost/config.hpp
+-
+cstddef
+-
+boost/move/detail/workaround.hpp
+-
+utility
+-
+bits/stl_algobase.h
+-
+bits/stl_move.h
+-
+bits/move.h
+-
+type_traits
+-
+utility
+-
+algorithm
+-
+boost/move/utility_core.hpp
+-
+
 /usr/local/include/boost/move/algo/move.hpp
 boost/config.hpp
 -
@@ -9764,6 +9976,8 @@ boost/move/detail/config_begin.hpp
 boost/move/utility_core.hpp
 -
 boost/move/detail/iterator_traits.hpp
+-
+boost/move/detail/iterator_to_raw_pointer.hpp
 -
 boost/detail/no_exceptions_support.hpp
 -
@@ -9804,6 +10018,24 @@ boost/move/detail/meta_utils.hpp
 boost/move/detail/config_end.hpp
 -
 
+/usr/local/include/boost/move/default_delete.hpp
+boost/config.hpp
+-
+boost/move/detail/config_begin.hpp
+-
+boost/move/detail/workaround.hpp
+-
+boost/move/detail/unique_ptr_meta_utils.hpp
+-
+boost/move/utility_core.hpp
+-
+boost/static_assert.hpp
+-
+cstddef
+-
+boost/move/detail/config_end.hpp
+-
+
 /usr/local/include/boost/move/detail/config_begin.hpp
 boost/config.hpp
 -
@@ -9814,6 +10046,16 @@ boost/config.hpp
 boost/config.hpp
 -
 boost/move/detail/workaround.hpp
+-
+
+/usr/local/include/boost/move/detail/iterator_to_raw_pointer.hpp
+boost/config.hpp
+-
+boost/move/detail/iterator_traits.hpp
+-
+boost/move/detail/to_raw_pointer.hpp
+-
+boost/move/detail/pointer_element.hpp
 -
 
 /usr/local/include/boost/move/detail/iterator_traits.hpp
@@ -9844,9 +10086,27 @@ boost/move/detail/config_end.hpp
 boost/config.hpp
 -
 
+/usr/local/include/boost/move/detail/pointer_element.hpp
+boost/config.hpp
+-
+boost/move/detail/workaround.hpp
+-
+
 /usr/local/include/boost/move/detail/std_ns_begin.hpp
 
 /usr/local/include/boost/move/detail/std_ns_end.hpp
+
+/usr/local/include/boost/move/detail/to_raw_pointer.hpp
+boost/config.hpp
+-
+boost/move/detail/config_begin.hpp
+-
+boost/move/detail/workaround.hpp
+-
+boost/move/detail/pointer_element.hpp
+-
+boost/move/detail/config_end.hpp
+-
 
 /usr/local/include/boost/move/detail/type_traits.hpp
 boost/config.hpp
@@ -9866,6 +10126,12 @@ cstddef
 msl_utility
 -
 boost/move/detail/config_end.hpp
+-
+
+/usr/local/include/boost/move/detail/unique_ptr_meta_utils.hpp
+boost/config.hpp
+-
+cstddef
 -
 
 /usr/local/include/boost/move/detail/workaround.hpp
@@ -9912,6 +10178,30 @@ boost/move/core.hpp
 boost/move/detail/meta_utils.hpp
 -
 boost/move/detail/type_traits.hpp
+-
+boost/move/detail/config_end.hpp
+-
+
+/usr/local/include/boost/move/unique_ptr.hpp
+boost/config.hpp
+-
+boost/move/detail/config_begin.hpp
+-
+boost/move/detail/workaround.hpp
+-
+boost/move/detail/unique_ptr_meta_utils.hpp
+-
+boost/move/default_delete.hpp
+-
+boost/move/utility_core.hpp
+-
+boost/move/adl_move_swap.hpp
+-
+boost/static_assert.hpp
+-
+boost/assert.hpp
+-
+cstddef
 -
 boost/move/detail/config_end.hpp
 -
@@ -9988,6 +10278,10 @@ array
 
 /usr/local/include/boost/mpi/datatype_fwd.hpp
 boost/mpi/config.hpp
+-
+
+/usr/local/include/boost/mpi/detail/antiques.hpp
+vector
 -
 
 /usr/local/include/boost/mpi/detail/ignore_skeleton_oarchive.hpp
@@ -10067,13 +10361,13 @@ boost/mpl/placeholders.hpp
 -
 boost/serialization/array.hpp
 -
-boost/serialization/detail/get_data.hpp
--
 stdexcept
 -
 iostream
 -
 vector
+-
+boost/mpi/detail/antiques.hpp
 -
 
 /usr/local/include/boost/mpi/exception.hpp
@@ -14653,15 +14947,9 @@ memory
 /usr/local/include/boost/next_prior.hpp
 iterator
 -
-boost/mpl/and.hpp
+boost/config.hpp
 -
-boost/type_traits/is_integral.hpp
--
-boost/type_traits/is_unsigned.hpp
--
-boost/type_traits/integral_promotion.hpp
--
-boost/type_traits/make_signed.hpp
+boost/core/enable_if.hpp
 -
 boost/type_traits/has_plus.hpp
 -
@@ -14670,6 +14958,10 @@ boost/type_traits/has_plus_assign.hpp
 boost/type_traits/has_minus.hpp
 -
 boost/type_traits/has_minus_assign.hpp
+-
+boost/iterator/advance.hpp
+-
+boost/iterator/reverse_iterator.hpp
 -
 
 /usr/local/include/boost/non_type.hpp
@@ -14903,6 +15195,8 @@ boost/config.hpp
 -
 boost/detail/workaround.hpp
 -
+boost/core/addressof.hpp
+-
 
 /usr/local/include/boost/operators_v1.hpp
 cstddef
@@ -14960,10 +15254,14 @@ boost/core/swap.hpp
 boost/optional/optional_fwd.hpp
 -
 
+/usr/local/include/boost/optional/detail/optional_trivially_copyable_base.hpp
+
 /usr/local/include/boost/optional/optional.hpp
 new
 -
 iosfwd
+-
+type_traits
 -
 boost/assert.hpp
 -
@@ -14999,6 +15297,8 @@ boost/type_traits/decay.hpp
 -
 boost/type_traits/is_base_of.hpp
 -
+boost/type_traits/is_const.hpp
+-
 boost/type_traits/is_constructible.hpp
 -
 boost/type_traits/is_lvalue_reference.hpp
@@ -15010,6 +15310,10 @@ boost/type_traits/is_nothrow_move_constructible.hpp
 boost/type_traits/is_rvalue_reference.hpp
 -
 boost/type_traits/is_same.hpp
+-
+boost/type_traits/is_volatile.hpp
+-
+boost/type_traits/is_scalar.hpp
 -
 boost/move/utility.hpp
 -
@@ -15026,6 +15330,8 @@ boost/optional/detail/optional_factory_support.hpp
 boost/optional/detail/optional_aligned_storage.hpp
 -
 boost/optional/detail/old_optional_implementation.hpp
+-
+boost/optional/detail/optional_trivially_copyable_base.hpp
 -
 boost/optional/detail/optional_reference_spec.hpp
 -
@@ -15116,6 +15422,8 @@ boost/type_traits/remove_cv.hpp
 boost/mpl/if.hpp
 -
 boost/mpl/eval_if.hpp
+-
+iterator
 -
 
 /usr/local/include/boost/pointer_to_other.hpp
@@ -15881,6 +16189,8 @@ boost/predef/library/std.h
 /usr/local/include/boost/predef/library/c.h
 boost/predef/library/c/_prefix.h
 -
+boost/predef/library/c/cloudabi.h
+-
 boost/predef/library/c/gnu.h
 -
 boost/predef/library/c/uc.h
@@ -15892,6 +16202,18 @@ boost/predef/library/c/zos.h
 
 /usr/local/include/boost/predef/library/c/_prefix.h
 boost/predef/detail/_cassert.h
+-
+
+/usr/local/include/boost/predef/library/c/cloudabi.h
+boost/predef/version_number.h
+-
+boost/predef/make.h
+-
+boost/predef/library/c/_prefix.h
+-
+stddef.h
+-
+boost/predef/detail/test.h
 -
 
 /usr/local/include/boost/predef/library/c/gnu.h
@@ -16201,6 +16523,8 @@ boost/predef/detail/test.h
 /usr/local/include/boost/predef/os/bsd/free.h
 boost/predef/os/bsd.h
 -
+sys/param.h
+-
 boost/predef/detail/os_detected.h
 -
 boost/predef/detail/test.h
@@ -16391,15 +16715,53 @@ boost/predef/detail/test.h
 -
 
 /usr/local/include/boost/predef/platform.h
+boost/predef/platform/cloudabi.h
+-
 boost/predef/platform/mingw.h
+-
+boost/predef/platform/mingw32.h
+-
+boost/predef/platform/mingw64.h
+-
+boost/predef/platform/windows_uwp.h
 -
 boost/predef/platform/windows_desktop.h
 -
-boost/predef/platform/windows_store.h
--
 boost/predef/platform/windows_phone.h
 -
+boost/predef/platform/windows_server.h
+-
+boost/predef/platform/windows_store.h
+-
+boost/predef/platform/windows_system.h
+-
 boost/predef/platform/windows_runtime.h
+-
+boost/predef/platform/ios.h
+-
+
+/usr/local/include/boost/predef/platform/cloudabi.h
+boost/predef/version_number.h
+-
+boost/predef/make.h
+-
+boost/predef/detail/platform_detected.h
+-
+boost/predef/detail/test.h
+-
+
+/usr/local/include/boost/predef/platform/ios.h
+boost/predef/os/ios.h
+-
+boost/predef/version_number.h
+-
+TargetConditionals.h
+-
+boost/predef/detail/platform_detected.h
+-
+boost/predef/detail/platform_detected.h
+-
+boost/predef/detail/test.h
 -
 
 /usr/local/include/boost/predef/platform/mingw.h
@@ -16416,12 +16778,42 @@ boost/predef/detail/test.h
 boost/predef/detail/test.h
 -
 
-/usr/local/include/boost/predef/platform/windows_desktop.h
+/usr/local/include/boost/predef/platform/mingw32.h
 boost/predef/version_number.h
 -
 boost/predef/make.h
 -
+_mingw.h
+-
+boost/predef/detail/platform_detected.h
+-
+boost/predef/detail/test.h
+-
+boost/predef/detail/test.h
+-
+
+/usr/local/include/boost/predef/platform/mingw64.h
+boost/predef/version_number.h
+-
+boost/predef/make.h
+-
+_mingw.h
+-
+boost/predef/detail/platform_detected.h
+-
+boost/predef/detail/test.h
+-
+boost/predef/detail/test.h
+-
+
+/usr/local/include/boost/predef/platform/windows_desktop.h
+boost/predef/make.h
+-
 boost/predef/os/windows.h
+-
+boost/predef/platform/windows_uwp.h
+-
+boost/predef/version_number.h
 -
 boost/predef/detail/platform_detected.h
 -
@@ -16429,11 +16821,13 @@ boost/predef/detail/test.h
 -
 
 /usr/local/include/boost/predef/platform/windows_phone.h
-boost/predef/version_number.h
--
 boost/predef/make.h
 -
 boost/predef/os/windows.h
+-
+boost/predef/platform/windows_uwp.h
+-
+boost/predef/version_number.h
 -
 boost/predef/detail/platform_detected.h
 -
@@ -16441,11 +16835,29 @@ boost/predef/detail/test.h
 -
 
 /usr/local/include/boost/predef/platform/windows_runtime.h
-boost/predef/version_number.h
--
 boost/predef/make.h
 -
 boost/predef/os/windows.h
+-
+boost/predef/platform/windows_phone.h
+-
+boost/predef/platform/windows_store.h
+-
+boost/predef/version_number.h
+-
+boost/predef/detail/platform_detected.h
+-
+boost/predef/detail/test.h
+-
+
+/usr/local/include/boost/predef/platform/windows_server.h
+boost/predef/make.h
+-
+boost/predef/os/windows.h
+-
+boost/predef/platform/windows_uwp.h
+-
+boost/predef/version_number.h
 -
 boost/predef/detail/platform_detected.h
 -
@@ -16453,13 +16865,45 @@ boost/predef/detail/test.h
 -
 
 /usr/local/include/boost/predef/platform/windows_store.h
-boost/predef/version_number.h
--
 boost/predef/make.h
 -
 boost/predef/os/windows.h
 -
+boost/predef/platform/windows_uwp.h
+-
+boost/predef/version_number.h
+-
 boost/predef/detail/platform_detected.h
+-
+boost/predef/detail/test.h
+-
+
+/usr/local/include/boost/predef/platform/windows_system.h
+boost/predef/make.h
+-
+boost/predef/os/windows.h
+-
+boost/predef/platform/windows_uwp.h
+-
+boost/predef/version_number.h
+-
+boost/predef/detail/platform_detected.h
+-
+boost/predef/detail/test.h
+-
+
+/usr/local/include/boost/predef/platform/windows_uwp.h
+boost/predef/make.h
+-
+boost/predef/os/windows.h
+-
+boost/predef/version_number.h
+-
+ntverp.h
+-
+boost/predef/detail/platform_detected.h
+-
+winapifamily.h
 -
 boost/predef/detail/test.h
 -
@@ -19499,6 +19943,8 @@ boost/range/detail/misc_concept.hpp
 -
 boost/type_traits/remove_reference.hpp
 -
+iterator
+-
 
 /usr/local/include/boost/range/config.hpp
 boost/detail/workaround.hpp
@@ -20139,6 +20585,8 @@ iostream
 -
 cstddef
 -
+boost/serialization/array_wrapper.hpp
+-
 array
 -
 boost/serialization/nvp.hpp
@@ -20228,12 +20676,6 @@ boost/config.hpp
 boost/detail/workaround.hpp
 -
 boost/config/auto_link.hpp
--
-
-/usr/local/include/boost/serialization/detail/get_data.hpp
-vector
--
-valarray
 -
 
 /usr/local/include/boost/serialization/extended_type_info.hpp
@@ -20370,6 +20812,8 @@ boost/serialization/base_object.hpp
 boost/serialization/traits.hpp
 -
 boost/serialization/wrapper.hpp
+-
+boost/core/addressof.hpp
 -
 boost/preprocessor/stringize.hpp
 -
@@ -20639,8 +21083,6 @@ boost/smart_ptr/shared_ptr.hpp
 -
 
 /usr/local/include/boost/smart_ptr.hpp
-boost/config.hpp
--
 boost/scoped_ptr.hpp
 -
 boost/scoped_array.hpp
@@ -20661,16 +21103,20 @@ boost/make_shared.hpp
 /usr/local/include/boost/smart_ptr/allocate_shared_array.hpp
 boost/smart_ptr/shared_ptr.hpp
 -
+boost/type_traits/alignment_of.hpp
+-
+boost/type_traits/has_trivial_assign.hpp
+-
 boost/type_traits/has_trivial_constructor.hpp
 -
 boost/type_traits/has_trivial_destructor.hpp
--
-boost/type_traits/alignment_of.hpp
 -
 boost/type_traits/type_with_alignment.hpp
 -
 
 /usr/local/include/boost/smart_ptr/bad_weak_ptr.hpp
+boost/config.hpp
+-
 exception
 -
 
@@ -20754,6 +21200,20 @@ boost/smart_ptr/detail/lwm_nop.hpp
 boost/smart_ptr/detail/lwm_pthreads.hpp
 -
 boost/smart_ptr/detail/lwm_win32_cs.hpp
+-
+
+/usr/local/include/boost/smart_ptr/detail/local_counted_base.hpp
+boost/smart_ptr/detail/shared_count.hpp
+-
+boost/config.hpp
+-
+utility
+-
+
+/usr/local/include/boost/smart_ptr/detail/local_sp_deleter.hpp
+boost/smart_ptr/detail/local_counted_base.hpp
+-
+boost/config.hpp
 -
 
 /usr/local/include/boost/smart_ptr/detail/lwm_nop.hpp
@@ -20971,6 +21431,8 @@ boost/checked_delete.hpp
 -
 boost/smart_ptr/detail/sp_counted_base.hpp
 -
+boost/core/addressof.hpp
+-
 boost/smart_ptr/detail/quick_allocator.hpp
 -
 memory
@@ -21141,6 +21603,8 @@ boost/smart_ptr/shared_ptr.hpp
 -
 boost/smart_ptr/detail/sp_forward.hpp
 -
+boost/smart_ptr/detail/sp_noexcept.hpp
+-
 boost/type_traits/type_with_alignment.hpp
 -
 boost/type_traits/alignment_of.hpp
@@ -21254,6 +21718,8 @@ iosfwd
 ostream
 -
 boost/smart_ptr/detail/operator_bool.hpp
+-
+boost/smart_ptr/detail/local_sp_deleter.hpp
 -
 
 /usr/local/include/boost/smart_ptr/weak_ptr.hpp
@@ -21853,7 +22319,7 @@ algorithm
 -
 functional
 -
-memory
+boost/move/unique_ptr.hpp
 -
 boost/weak_ptr.hpp
 -
@@ -22783,12 +23249,18 @@ cassert
 -
 cstring
 -
-windows.h
+boost/winapi/error_codes.hpp
+-
+boost/winapi/error_handling.hpp
+-
+boost/winapi/character_code_conversion.hpp
 -
 boost/system/detail/local_free_on_destruction.hpp
 -
 
 /usr/local/include/boost/system/detail/local_free_on_destruction.hpp
+boost/winapi/local_memory.hpp
+-
 
 /usr/local/include/boost/system/error_code.hpp
 boost/system/config.hpp
@@ -22810,6 +23282,8 @@ stdexcept
 functional
 -
 boost/cerrno.hpp
+-
+system_error
 -
 boost/config/abi_prefix.hpp
 -
@@ -22887,11 +23361,7 @@ boost/type_traits/is_array.hpp
 -
 boost/type_traits/is_function.hpp
 -
-boost/type_traits/remove_cv.hpp
--
 boost/type_traits/add_pointer.hpp
--
-boost/type_traits/decay.hpp
 -
 boost/thread/detail/delete.hpp
 -
@@ -23257,7 +23727,7 @@ boost/throw_exception.hpp
 -
 boost/core/no_exceptions_support.hpp
 -
-windows.h
+boost/detail/winapi/heap_memory.hpp
 -
 boost/config/abi_prefix.hpp
 -
@@ -23279,15 +23749,37 @@ boost/detail/interlocked.hpp
 -
 boost/detail/winapi/config.hpp
 -
+boost/detail/winapi/semaphore.hpp
+-
+boost/detail/winapi/dll.hpp
+-
+boost/detail/winapi/system.hpp
+-
+boost/detail/winapi/time.hpp
+-
+boost/detail/winapi/event.hpp
+-
+boost/detail/winapi/thread.hpp
+-
+boost/detail/winapi/get_current_thread.hpp
+-
+boost/detail/winapi/get_current_thread_id.hpp
+-
+boost/detail/winapi/get_current_process.hpp
+-
+boost/detail/winapi/get_current_process_id.hpp
+-
+boost/detail/winapi/wait.hpp
+-
+boost/detail/winapi/handles.hpp
+-
+boost/detail/winapi/access_rights.hpp
+-
 boost/thread/win32/interlocked_read.hpp
 -
 algorithm
 -
 thread
--
-windows.h
--
-kfuncs.h
 -
 boost/config/abi_prefix.hpp
 -
@@ -23324,23 +23816,23 @@ boost/current_function.hpp
 utility
 -
 boost/type_traits/cv_traits.hpp
-/usr/local/include/boost/tuple/detail/boost/type_traits/cv_traits.hpp
+-
 boost/type_traits/function_traits.hpp
-/usr/local/include/boost/tuple/detail/boost/type_traits/function_traits.hpp
+-
 boost/utility/swap.hpp
-/usr/local/include/boost/tuple/detail/boost/utility/swap.hpp
+-
 boost/detail/workaround.hpp
-/usr/local/include/boost/tuple/detail/boost/detail/workaround.hpp
+-
 
 /usr/local/include/boost/tuple/tuple.hpp
 boost/config.hpp
-/usr/local/include/boost/tuple/boost/config.hpp
+-
 boost/static_assert.hpp
-/usr/local/include/boost/tuple/boost/static_assert.hpp
+-
 boost/ref.hpp
-/usr/local/include/boost/tuple/boost/ref.hpp
+-
 boost/tuple/detail/tuple_basic.hpp
-/usr/local/include/boost/tuple/boost/tuple/detail/tuple_basic.hpp
+-
 
 /usr/local/include/boost/type.hpp
 
@@ -23362,6 +23854,8 @@ boost/type_index/type_index_facade.hpp
 boost/type_index/detail/compile_time_type_info.hpp
 -
 cstring
+-
+boost/functional/hash.hpp
 -
 boost/static_assert.hpp
 -
@@ -23416,6 +23910,8 @@ boost/type_traits/remove_reference.hpp
 boost/mpl/if.hpp
 -
 boost/mpl/or.hpp
+-
+boost/functional/hash.hpp
 -
 boost/type_traits/is_signed.hpp
 -
@@ -23678,6 +24174,8 @@ boost/type_traits/remove_bounds.hpp
 boost/type_traits/remove_const.hpp
 -
 boost/type_traits/remove_cv.hpp
+-
+boost/type_traits/remove_cv_ref.hpp
 -
 boost/type_traits/remove_extent.hpp
 -
@@ -25072,6 +25570,14 @@ boost/detail/workaround.hpp
 cstddef
 -
 
+/usr/local/include/boost/type_traits/remove_cv_ref.hpp
+boost/config.hpp
+-
+boost/type_traits/remove_cv.hpp
+-
+boost/type_traits/remove_reference.hpp
+-
+
 /usr/local/include/boost/type_traits/remove_extent.hpp
 boost/config.hpp
 -
@@ -25122,6 +25628,12 @@ cstddef
 boost/detail/workaround.hpp
 -
 boost/type_traits/conditional.hpp
+-
+
+/usr/local/include/boost/typeof/decltype.hpp
+boost/type_traits/remove_cv.hpp
+-
+boost/type_traits/remove_reference.hpp
 -
 
 /usr/local/include/boost/typeof/dmc/typeof_impl.hpp
@@ -25257,9 +25769,9 @@ boost/preprocessor/seq/enum.hpp
 /usr/local/include/boost/typeof/type_template_param.hpp
 
 /usr/local/include/boost/typeof/typeof.hpp
-boost/typeof/dmc/typeof_impl.hpp
+boost/config.hpp
 -
-boost/typeof/msvc/typeof_impl.hpp
+boost/typeof/dmc/typeof_impl.hpp
 -
 boost/typeof/msvc/typeof_impl.hpp
 -
@@ -25282,6 +25794,8 @@ boost/typeof/register_functions.hpp
 boost/typeof/register_fundamental.hpp
 -
 boost/typeof/message.hpp
+-
+boost/typeof/decltype.hpp
 -
 boost/typeof/native.hpp
 -
@@ -25365,6 +25879,10 @@ boost/limits.hpp
 -
 boost/move/move.hpp
 -
+boost/predef.h
+-
+boost/preprocessor/arithmetic/inc.hpp
+-
 boost/preprocessor/cat.hpp
 -
 boost/preprocessor/repetition/enum.hpp
@@ -25419,9 +25937,9 @@ stdexcept
 -
 utility
 -
-tuple
--
 type_traits
+-
+tuple
 -
 boost/limits.hpp
 -
@@ -25454,6 +25972,8 @@ boost/core/explicit_operator_bool.hpp
 boost/functional/hash.hpp
 -
 boost/move/move.hpp
+-
+boost/type_traits/is_constructible.hpp
 -
 boost/unordered/detail/map.hpp
 -
@@ -25580,6 +26100,8 @@ functional
 boost/type_traits/declval.hpp
 -
 
+/usr/local/include/boost/utility/detail/result_of_iterate.hpp
+
 /usr/local/include/boost/utility/enable_if.hpp
 boost/core/enable_if.hpp
 -
@@ -25633,6 +26155,8 @@ boost/utility/declval.hpp
 -
 boost/utility/enable_if.hpp
 -
+boost/utility/detail/result_of_iterate.hpp
+-
 
 /usr/local/include/boost/utility/swap.hpp
 boost/core/swap.hpp
@@ -25644,6 +26168,116 @@ boost/core/swap.hpp
 
 /usr/local/include/boost/weak_ptr.hpp
 boost/smart_ptr/weak_ptr.hpp
+-
+
+/usr/local/include/boost/winapi/access_rights.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/basic_types.hpp
+cstdarg
+-
+boost/cstdint.hpp
+-
+boost/winapi/config.hpp
+-
+windows.h
+-
+winerror.h
+-
+kfuncs.h
+-
+
+/usr/local/include/boost/winapi/character_code_conversion.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/config.hpp
+boost/predef/version_number.h
+-
+boost/predef/platform.h
+-
+boost/config.hpp
+-
+
+/usr/local/include/boost/winapi/dll.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/error_codes.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/error_handling.hpp
+stdarg.h
+-
+boost/winapi/basic_types.hpp
+-
+boost/winapi/get_last_error.hpp
+-
+
+/usr/local/include/boost/winapi/event.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/get_current_process.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/get_current_process_id.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/get_current_thread.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/get_current_thread_id.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/get_last_error.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/handles.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/heap_memory.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/local_memory.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/semaphore.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/system.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/thread.hpp
+boost/winapi/basic_types.hpp
+-
+boost/winapi/get_current_thread.hpp
+-
+boost/winapi/get_current_thread_id.hpp
+-
+
+/usr/local/include/boost/winapi/time.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/timers.hpp
+boost/winapi/basic_types.hpp
+-
+
+/usr/local/include/boost/winapi/wait.hpp
+boost/winapi/basic_types.hpp
 -
 
 /usr/local/include/boost/xpressive/basic_regex.hpp

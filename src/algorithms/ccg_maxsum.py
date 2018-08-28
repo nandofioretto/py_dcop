@@ -90,12 +90,12 @@ class CCGMaxSum(Algorithm):
                 # Normalize values
                 m -= np.min(m) # m -= np.mean(m)
 
-                # Add noise to help stabilizing convergence
-                m += self.prng.normal(scale=0.01, size=len(m))
-
                 # Damping
                 if self.damping > 0:
                     m = self.damping * self.msgs[u][v] + (1-self.damping) * m
+
+                # Add noise to help stabilizing convergence
+                m += self.prng.normal(scale=0.01, size=len(m))
 
                 self.num_messages_sent += 1
                 self.msgs[u][v] = m

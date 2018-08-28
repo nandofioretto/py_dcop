@@ -4,11 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolver.cpp" "/home/fioretto/Repos/py_dcop/third_parties/wcsp/build/src/CMakeFiles/wcsp.dir/LinearProgramSolver.cpp.o"
-  "/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/LinearProgramSolverGurobi.cpp" "/home/fioretto/Repos/py_dcop/third_parties/wcsp/build/src/CMakeFiles/wcsp.dir/LinearProgramSolverGurobi.cpp.o"
-  "/home/fioretto/Repos/py_dcop/third_parties/wcsp/src/main.cpp" "/home/fioretto/Repos/py_dcop/third_parties/wcsp/build/src/CMakeFiles/wcsp.dir/main.cpp.o"
+  "/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/LinearProgramSolver.cpp" "/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/build/src/CMakeFiles/wcsp.dir/LinearProgramSolver.cpp.o"
+  "/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/LinearProgramSolverGurobi.cpp" "/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/build/src/CMakeFiles/wcsp.dir/LinearProgramSolverGurobi.cpp.o"
+  "/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src/main.cpp" "/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/build/src/CMakeFiles/wcsp.dir/main.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
+set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
@@ -17,8 +17,9 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "/Library/gurobi752/mac64/include"
+  "/usr/local/Cellar/openblas/0.3.2/include"
   "/usr/local/include"
-  "/opt/gurobi702/linux64/include"
   )
 
 # Targets to which this target links.

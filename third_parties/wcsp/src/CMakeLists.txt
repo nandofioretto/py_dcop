@@ -30,18 +30,10 @@ if(BLAS_FOUND)
 endif()
 
 # For now, we assume Gurobi is always available
-# add_definitions(-DHAVE_GUROBI)
-# set(GUROBI_VERSION "75" CACHE STRING "Gurobi version.")
-# You may need to change gurobi_g++5.2 to gurobi_g++4.2 if you are using an older version of gcc.
-# set(GUROBI_LIBRARIES "gurobi_g++4.2" "gurobi${GUROBI_VERSION}")
-
-# For now, we assume Gurobi is always available
 add_definitions(-DHAVE_GUROBI)
-include_directories(/opt/gurobi702/linux64/include)
-link_directories(/opt/gurobi702/linux64/lib)
+set(GUROBI_VERSION "75" CACHE STRING "Gurobi version.")
 # You may need to change gurobi_g++5.2 to gurobi_g++4.2 if you are using an older version of gcc.
-set(GUROBI_LIBRARIES "gurobi_g++5.2" "gurobi70")
-
+set(GUROBI_LIBRARIES "gurobi_g++4.2" "gurobi${GUROBI_VERSION}")
 
 set(wcsp_BINSRCS
   LinearProgramSolver.cpp

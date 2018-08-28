@@ -1,4 +1,4 @@
-# Install script for directory: /home/fioretto/Repos/py_dcop/third_parties/wcsp/src
+# Install script for directory: /Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -27,27 +27,23 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
-# Install shared libraries without execute permission?
-if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
-  set(CMAKE_INSTALL_SO_NO_EXE "1")
+# Is this installation the result of a crosscompile?
+if(NOT DEFINED CMAKE_CROSSCOMPILING)
+  set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/build/bin/wcsp")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp")
-    file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp"
-         RPATH "")
-  endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/fioretto/Repos/py_dcop/third_parties/wcsp/build/bin/wcsp")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp")
-    file(RPATH_CHANGE
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp"
-         OLD_RPATH "/opt/gurobi702/linux64/lib:/usr/local/lib:"
-         NEW_RPATH "")
+    execute_process(COMMAND /usr/bin/install_name_tool
+      -delete_rpath "/Library/gurobi752/mac64/lib"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp")
+    execute_process(COMMAND /usr/bin/install_name_tool
+      -delete_rpath "/usr/local/Cellar/openblas/0.3.2/lib"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp")
+      execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp")
     endif()
   endif()
 endif()

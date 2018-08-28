@@ -103,8 +103,9 @@ class DCOPInstance:
 
         # Generate constraints - one for each clique
         i = 0
-        # with tqdm(total=G.number_of_edges()) as pbar:
-        for clique in nx.find_cliques(G):
+        cliques = G.edges() if max_clique_size == 2 else nx.find_cliques(G)
+
+        for clique in cliques:
             clique = sorted(clique)
             if len(clique) <= max_clique_size:
                 self._create_constraint('c_' + str(i), clique, cost_range, p2, def_cost)
@@ -127,16 +128,33 @@ class DCOPInstance:
                 ai.addNeighbor(aj, self.constraints[con])
 
     def _create_variables(self, n, dsize):
+        """
+        Creates a variable
+        :param n:
+        :param dsize:
+        :return:
+        """
         vname = 'v_' + str(n)
         domain = list(range(dsize))
         self.variables[vname] = Variable(name=vname, domain=domain, type='decision')
 
     def _create_constraint(self, name, clique, cost_range, p2=1.0, def_cost=np.infty):
+        """
+        Crates a constraint
+        :param name:
+        :param clique:
+        :param cost_range:
+        :param p2:
+        :param def_cost:
+        :return:
+        """
         scope = ['v_' + str(ci) for ci in clique]
         domains = [self.variables[vname].domain for vname in scope]
         all_tuples = product(*domains)
         n = reduce(operator.mul, map(len, domains), 1)
-        costs = self.prng.randint(low=cost_range[0], high=cost_range[1], size=n).astype(float)
+        costs = (self.prng.beta(a=2, b=5, size=n) * cost_range[1]).astype(int)
+        #costs = self.prng.randint(low=cost_range[0], high=cost_range[1], size=n).astype(int)
+
         violations = int((1-p2) * n)
         for i in self.prng.randint(low=0, high=n, size=violations):
             costs[i] = def_cost
@@ -149,6 +167,11 @@ class DCOPInstance:
             self.variables[vid].addConstraint(self.constraints[name])
 
     def _create_agents(self, n):
+        """
+        Creates an agent
+        :param n:
+        :return:
+        """
         name, vid = 'a_' + str(n), 'v_' + str(n)
         self.agents[name] = Agent(name, variables=[self.variables[vid]],
                                   constraints=self.variables[vid].constraints)
