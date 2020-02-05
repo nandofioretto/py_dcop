@@ -7,7 +7,7 @@ algorithms=("dsa" "maxsum" "ccg-maxsum+" "ccg-maxsum+k" "ccg-maxsum" "ccg-maxsum
 py_dcop_home="/Users/nando/Repos/DCOP/py_dcop"
 cd ${py_dcop_home}
 
-seeds=(1) # 20 30 40 50 60 70 80 90 100)
+seeds=(3) # 20 30 40 50 60 70 80 90 100)
 for seed in ${seeds[@]}; do    
 	dcop_file="${py_dcop_home}/data/in/grid_${seed}.json"
 	python src/py_dcop2.py --nagents=20 --domsize=3 --seed=${seed} --graph="grid" --fileout="${dcop_file}"

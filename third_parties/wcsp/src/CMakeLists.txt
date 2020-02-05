@@ -31,7 +31,7 @@ endif()
 
 # For now, we assume Gurobi is always available
 add_definitions(-DHAVE_GUROBI)
-set(GUROBI_VERSION "75" CACHE STRING "Gurobi version.")
+set(GUROBI_VERSION "90" CACHE STRING "Gurobi version.")
 # You may need to change gurobi_g++5.2 to gurobi_g++4.2 if you are using an older version of gcc.
 set(GUROBI_LIBRARIES "gurobi_g++4.2" "gurobi${GUROBI_VERSION}")
 

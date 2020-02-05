@@ -1,6 +1,6 @@
 import numpy as np
 import networkx as nx
-from gurobi import *
+from gurobipy import *
 
 from algorithms.algorithm import Algorithm
 from utils.ccg_utils import transform_dcop_instance_to_ccg, set_var_value

@@ -1,5 +1,5 @@
 #CCG_EXECUTABLE_PATH = '/home/fioretto/Repos/py_dcop/third_parties/wcsp/build/bin/wcsp'
-CCG_EXECUTABLE_PATH= '/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/build/bin/wcsp'
+CCG_EXECUTABLE_PATH= '/Users/ferdinandofioretto/Repos/dcop-ccg/third_parties/wcsp/build/bin/wcsp'
 
 from io import StringIO
 from tempfile import NamedTemporaryFile
@@ -61,7 +61,7 @@ def dcop_instance_to_dimacs(instance):
         for vs, w in c.values.items():
             print(' '.join(str(v) for v in vs) + ' ' + str(w), file=input_file)
 
-    return input_file    
+    return input_file
 
 def transform_dcop_instance_to_ccg(instance: DCOPInstance) -> nx.Graph:
     """
@@ -161,12 +161,12 @@ def transform_dcop_instance_to_ccg(instance: DCOPInstance) -> nx.Graph:
         bvs = non_boolean_mapping[nbv_id]
         for i, bv in enumerate(bvs):
             ver = boolean_mapping[bv]
-            ccg.node[ver]['type'] = 'decision'
-            ccg.node[ver]['variable'] = nbv
+            ccg.nodes[ver]['type'] = 'decision'
+            ccg.nodes[ver]['variable'] = nbv
             if len(bvs) == 1:
-                ccg.node[ver]['rank'] = 0
+                ccg.nodes[ver]['rank'] = 0
             else:
-                ccg.node[ver]['rank'] = i + 1
+                ccg.nodes[ver]['rank'] = i + 1
 
     print('Number of CCG Nodes:', ccg.number_of_nodes())
     return ccg
@@ -185,15 +185,15 @@ def merge_mwvc_constraints(agt1: str, G1: nx.Graph, agt2: str, G2:  nx.Graph) ->
      processed after the merging operation.
     """
     shared_dec_vars = [n for n in G1.nodes() for m in G2.nodes()
-                          if n == m and G1.node[n]['type'] == 'dec_var']
+                          if n == m and G1.nodes[n]['type'] == 'dec_var']
     for u in shared_dec_vars:
         if agt1 <= agt2:
-            G1.node[u]['weight'] += G2.node[u]['weight']
+            G1.nodes[u]['weight'] += G2.nodes[u]['weight']
             for e in G2.edges(u):
                 G1.add_edge(e[0], e[1], w=G2.get_edge_data(*e)['w'])
             G2.remove_node(u)
         else:
-            G2.node[u]['weight'] += G1.node[u]['weight']
+            G2.nodes[u]['weight'] += G1.nodes[u]['weight']
             for e in G1.edges(u):
                 G2.add_edge(e[0], e[1], w=G1.get_edge_data(*e)['w'])
             G1.remove_node(u)
@@ -203,9 +203,9 @@ def merge_mwvc_constraints(agt1: str, G1: nx.Graph, agt2: str, G2:  nx.Graph) ->
 # Fast
 def add_node_from(G_to, G_from, n, agt=None):
     G_to.add_node(n)
-    for attr in G_from.node[n]:
-        G_to.node[n][attr] = G_from.node[n][attr]
-    G_to.node[n]['owner'] = agt
+    for attr in G_from.nodes[n]:
+        G_to.nodes[n][attr] = G_from.nodes[n][attr]
+    G_to.nodes[n]['owner'] = agt
 
 def make_gadgets(G, dcop_instance):
     # Associates variables to CCG nodes

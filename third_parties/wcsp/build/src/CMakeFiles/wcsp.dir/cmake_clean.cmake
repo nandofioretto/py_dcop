@@ -1,9 +1,9 @@
 file(REMOVE_RECURSE
+  "../bin/wcsp"
+  "../bin/wcsp.pdb"
   "CMakeFiles/wcsp.dir/LinearProgramSolver.cpp.o"
   "CMakeFiles/wcsp.dir/LinearProgramSolverGurobi.cpp.o"
   "CMakeFiles/wcsp.dir/main.cpp.o"
-  "../bin/wcsp.pdb"
-  "../bin/wcsp"
 )
 
 # Per-language clean rules from dependency scanning.

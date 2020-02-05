@@ -1,4 +1,4 @@
-# Install script for directory: /Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/src
+# Install script for directory: /Users/ferdinandofioretto/Repos/dcop-ccg/third_parties/wcsp/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -33,17 +33,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/Users/nando/Repos/DCOP/py_dcop/third_parties/wcsp/build/bin/wcsp")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/Users/ferdinandofioretto/Repos/dcop-ccg/third_parties/wcsp/build/bin/wcsp")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp")
     execute_process(COMMAND /usr/bin/install_name_tool
-      -delete_rpath "/Library/gurobi752/mac64/lib"
+      -delete_rpath "/Library/gurobi900/mac64/lib"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp")
     execute_process(COMMAND /usr/bin/install_name_tool
-      -delete_rpath "/usr/local/Cellar/openblas/0.3.2/lib"
+      -delete_rpath "/usr/local/opt/openblas/lib"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp")
+      execute_process(COMMAND "/Library/Developer/CommandLineTools/usr/bin/strip" -u -r "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wcsp")
     endif()
   endif()
 endif()

@@ -2,3 +2,4 @@ networkx>=2.1
 more-itertools>=4.1.0
 numpy>=1.14
 tqdm
+pandas

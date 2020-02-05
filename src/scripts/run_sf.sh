@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-algorithms=("dsa" "maxsum" "ccg-maxsum+" "ccg-maxsum+k"  "ccg-dsa"  "dsa&ccg-maxsum" "dsa&ccg-maxsum-c" "dsa&ccg-dsa"  "dsa&rand") 
+algorithms=("dsa" "maxsum" "ccg-maxsum+" "ccg-maxsum+k"  "ccg-dsa"  "dsa&ccg-maxsum" "dsa&ccg-maxsum-c" "dsa&ccg-dsa"  "dsa&rand")
 # "ccg-maxsum" "ccg-maxsum-c"
 
 py_dcop_home="/home/fioretto/Repos/py_dcop"
@@ -20,5 +20,5 @@ for seed in ${seeds[@]}; do
 	 	       --filein="${dcop_file}" \
 	 	       --fileout="${py_dcop_home}/data/out/${alg}_sf_s${seed}_.csv"
 	done
-	    
+
 done

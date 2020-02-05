@@ -25,7 +25,7 @@ class CCGDsa(Algorithm):
 
     def onStart(self, agt):
         # First Iteration: Set random assignment
-        #agt.setRandomAssignment()
+        agt.setRandomAssignment()
         if agt.name is self.root:
             for var in self.variables:
                 v_val = var.value
@@ -85,7 +85,7 @@ class CCGDsa(Algorithm):
             Delta = curr_cost - np.min(best_new_cost)
             if Delta > 0 or (Delta == 0 and self.dsa_type == 'C'):
                 # Select new values with probability p
-                if self.prng.binomial(n=0, p=self.dsa_p):
+                if self.prng.binomial(n=1, p=self.dsa_p):
                     self.values[u] = best_assignment
 
     def onCycleEnd(self, agt):

@@ -23,8 +23,8 @@ import sys
 import re
 
 
-DATA_PATH = '/Users/nando/Repos/DCOP/py_dcop/data/'
-NEXPERIMEMTS = 5
+DATA_PATH = '/Users/ferdinandofioretto/Repos/dcop-ccg/data/'
+NEXPERIMEMTS = 1
 
 parser = argparse.ArgumentParser( prog='py-dcop', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--algorithm', dest='algorithm', type=str,
@@ -32,7 +32,7 @@ parser.add_argument('--algorithm', dest='algorithm', type=str,
                     help='one of [dsa|maxsum|ccg-maxsum|ccg-maxsum-c|ccg-dsa|'
                                 'dsa&ccg-maxsum|dsa&ccg-maxsum-c|dsa&ccg-dsa]')
 parser.add_argument('--iterations', dest='iterations', type=int,
-                    default=5000,
+                    default=500,
                     help='number of iterations')
 parser.add_argument('--seed', dest='seed', type=int,
                     default=1234,
@@ -94,7 +94,7 @@ if __name__ == '__main__':
             dcop.to_file(fileout)
             exit()
     else:
-        dcop = DCOPInstance(seed=seed, filepath=filein)
+        dcop = DCOPInstance(seed=seed, filepath=DATA_PATH+'in/'+filein)
 
     ##########################
     ## Run algorithms
@@ -105,7 +105,7 @@ if __name__ == '__main__':
         alg1, alg2 = None, None
         r = max(1, iterations / 50)
         if algname == 'dsa':
-            alg1 = Dsa('dsa', dcop, {'max_iter': iterations, 'type': 'C', 'p': 0.001}, seed=seed)
+            alg1 = Dsa('dsa', dcop, {'max_iter': iterations, 'type': 'C', 'p': 0.007}, seed=seed)
             n_rep = 1
         elif algname == 'maxsum':
             alg1 = MaxSum('maxsum', dcop, {'max_iter': iterations, 'damping': 0.7}, seed=seed)
@@ -160,7 +160,7 @@ if __name__ == '__main__':
                     itr, cost, msgs, time = re.split(r'\t+', lines[i].rstrip('\t'))
                     StatsCollector.addIterStats(algname, int(itr), int(cost), int(msgs), float(time))
                     i += 1
-            
+
             ##########################
             ## Statistics
             ##########################
@@ -170,7 +170,7 @@ if __name__ == '__main__':
                 print(StatsCollector.iter_stats[-1])
             else:
                 StatsCollector.printSummary()
-        
+
             exit()
 
         for k in range(NEXPERIMEMTS):
@@ -194,4 +194,4 @@ if __name__ == '__main__':
                 StatsCollector.getDataFrameSummary().to_csv(filename + str(k) + extension)
                 print(StatsCollector.iter_stats[-1])
             else:
-                StatsCollector.printSummary()
+                StatsCollector.printSummary(print_n_iter=50)

@@ -19,10 +19,10 @@ cmake_minimum_required(VERSION 3.0)
 
 project(wcsp CXX)
 
-INCLUDE_DIRECTORIES(/Library/gurobi752/mac64/include)
-LINK_DIRECTORIES(/Library/gurobi752/mac64/lib)
-INCLUDE_DIRECTORIES(/usr/local/Cellar/openblas/0.3.2/include)
-LINK_DIRECTORIES(/usr/local/Cellar/openblas/0.3.2/lib)
+INCLUDE_DIRECTORIES(/Library/gurobi900/mac64/include)
+LINK_DIRECTORIES(/Library/gurobi900/mac64/lib)
+INCLUDE_DIRECTORIES(/usr/local/opt/openblas/include)
+LINK_DIRECTORIES(/usr/local/opt/openblas/lib)
 
 # set default compilation directory
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib")

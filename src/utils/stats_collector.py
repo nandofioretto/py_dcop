@@ -37,13 +37,14 @@ class StatsCollector:
 
 
     @staticmethod
-    def printSummary(anytime=True):
+    def printSummary(anytime=True, print_n_iter=1):
         print('alg\titer\tmsgs\ttime\tcost')
         best_cost = np.inf
         for s in StatsCollector.iter_stats:
             best_cost = min(s['cost'], best_cost)
-            print(s['alg'], s['iteration'], s['messages'], round(s['time'], 4),
-                  best_cost if anytime else s['cost'], sep='\t\t')
+            if s['iteration'] % print_n_iter == 0:
+                print(s['alg'], s['iteration'], s['messages'], round(s['time'], 4),
+                      best_cost if anytime else s['cost'], sep='\t\t')
 
     @staticmethod
     def getDataFrameSummary(anytime=True):
