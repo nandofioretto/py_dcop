@@ -1,5 +1,6 @@
 import json
 import os
+import pathlib
 import networkx as nx
 import numpy as np
 from itertools import product, permutations, combinations
@@ -183,6 +184,9 @@ class DCOPInstance:
         :param fileout:
         :return:
         """
+        dirout =os.path.split(fileout)[0]
+        pathlib.Path(dirout).mkdir(parents=True, exist_ok=True)
+
         jout = {'constraints': {}, 'agents': {}, 'variables': {}}
         for a in self.agents:
             agt = self.agents[a]

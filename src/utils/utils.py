@@ -1,6 +1,5 @@
 import networkx as nx
 
-
 def takeMin(cost, best_c, i=None, best_i=None):
     if cost < best_c:
         return cost, i

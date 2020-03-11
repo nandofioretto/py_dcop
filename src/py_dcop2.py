@@ -13,6 +13,7 @@ from utils.stats_collector import StatsCollector
 from core.dcop_generator import DCOPGenerator
 from math import sqrt
 import argparse
+import pathlib
 from tqdm import tqdm
 import pandas as pd
 import os
@@ -94,7 +95,12 @@ if __name__ == '__main__':
             dcop.to_file(fileout)
             exit()
     else:
-        dcop = DCOPInstance(seed=seed, filepath=DATA_PATH+'in/'+filein)
+        #dcop = DCOPInstance(seed=seed, filepath=DATA_PATH+'in/'+filein)
+        dcop = DCOPInstance(seed=seed, filepath=filein)
+
+    if fileout is not None:
+        dirout =os.path.split(fileout)[0]
+        pathlib.Path(dirout).mkdir(parents=True, exist_ok=True)
 
     ##########################
     ## Run algorithms
@@ -105,7 +111,7 @@ if __name__ == '__main__':
         alg1, alg2 = None, None
         r = max(1, iterations / 50)
         if algname == 'dsa':
-            alg1 = Dsa('dsa', dcop, {'max_iter': iterations, 'type': 'C', 'p': 0.007}, seed=seed)
+            alg1 = Dsa('dsa', dcop, {'max_iter': iterations, 'type': 'A', 'p': 0.001}, seed=seed)
             n_rep = 1
         elif algname == 'maxsum':
             alg1 = MaxSum('maxsum', dcop, {'max_iter': iterations, 'damping': 0.7}, seed=seed)
